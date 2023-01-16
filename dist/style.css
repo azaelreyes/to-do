@@ -45,7 +45,7 @@ body{
   padding: 1vh;
   align-content: center;
 }
-.sidebarItem:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+.sidebarItem:hover{box-shadow: 5px 5px 5px rgb(89, 89, 89);}
 .sideBarItemIcon{
   background-position: center;
   background-repeat: no-repeat;
@@ -66,12 +66,18 @@ body{
   background-image: url(./img/addCircle.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
-  width: 140px;
-  height: 10vh; 
+  background-size:135%;
+  width: 60px;
+  height: 60px; 
   position: absolute;
-  margin-top: -15vh;
-  margin-left: 130px;
+  margin-top: -13vh;
+  margin-left: 160px;
+  border-radius: 100px;
+}
+#addCircle:hover{
+  box-shadow: 10px 10px 10px rgb(151, 148, 148);
+  width: 65px;
+  height: 65px;
 }
 #projects{
   margin-top: 20px;
@@ -81,6 +87,8 @@ body{
 .projectList{
   max-height: 30vh;
   overflow-y: auto;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 #projectsTitle{
   color: rgb(89, 89, 89);
@@ -116,7 +124,7 @@ hr{
   padding-left: 10px;
 
 }
-.projectItem:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+.projectItem:hover{box-shadow: 5px 5px 5px rgb(89, 89, 89);}
 
 .editProject{background-image: url(./img/edit.svg);}
 .deleteProject{background-image: url(./img/delete.svg);}
@@ -183,7 +191,7 @@ hr{
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.task:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+.task:hover{box-shadow: 5px 5px 5px rgb(89, 89, 89);}
 .highPriority{border-left: 15px solid rgb(233, 94, 94);}
 .mediumPriority{border-left: 15px solid rgb(123, 235, 123);}
 .lowPriority{border-left: 15px solid rgb(62, 205, 252);}
@@ -225,12 +233,134 @@ hr{
 .visible {
   visibility: visible;
   opacity: 1;
-  transition: visibility 0s linear .7s, opacity .7s;
-  transition-delay: .6s;
+  transition: visibility .7s linear .7s, opacity .7s;
 }
 .hidden {
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s linear .7s, opacity .7s;
+  transition: visibility .7s linear .7s, opacity .7s;
+
 }
-#mainAddTask{}
+#mainAddTask{
+  position: absolute;
+  height: 400px;
+  width: 600px;
+  background-color: rgb(231, 231, 231);
+  left: 0; 
+  right: 0; 
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto; 
+  margin-right: auto; 
+}
+#blurBackground{
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  left: 0; 
+  right: 0; 
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto; 
+  margin-right: auto;
+}
+.mainAddTaskHeader{
+  height: 55px;
+  width: 600px;
+  background-color: rgb(219, 81, 81);
+  color:whitesmoke;
+  font-size: larger;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  
+}
+.mainAddTaskHeader > p{
+  margin-left: 15px;
+}
+#exitAddTask{
+  background-image: url(./img/exit.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  margin-left: 410px;
+}
+#newTaskForm{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+#info{
+  width: 540px;
+  height: 120px;
+  padding-left: 15px;
+  padding-top: 10px;
+  margin-top: 20px;
+  font-size: large;
+}
+
+#taskName{
+  height: 30px;
+  width: 540px ;
+  padding-left: 15px;
+  font-size: larger;
+}
+#date{
+  width: 120px;
+  height: 30px;
+  padding-left: 15px;
+  margin-top: 20px;
+  
+}
+#addTaskForm{
+  width: 120px;
+  height: 30px;
+  margin-top: 20px;
+}
+
+#priorityLvlDiv{
+  display: flex;
+  flex-wrap: wrap;
+  width: 420px;
+  
+}
+#priorityLvlDiv > div> p{
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  left: auto;
+  margin-right:auto;
+}
+#bottomOfFOrm{
+  display: flex;
+  flex-wrap: wrap;
+  width: 540px;
+}
+.priorityLvl{
+  width: 70px;
+  height: 20px;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+.highPriorityBtn{
+  border: 3px solid rgb(233, 94, 94);
+  color:rgb(233, 94, 94);
+}
+.mediumPriorityBtn{
+  border: 3px solid rgb(123, 235, 123);
+  color:rgb(123, 235, 123);
+}
+.lowPriorityBtn{
+  border: 3px solid rgb(62, 205, 252);
+  color:rgb(62, 205, 252);
+}
+label{
+  color:rgb(89, 89, 89);
+}
