@@ -249,8 +249,37 @@
       </div>
 
       <!-- Add Task Pop Up -->
-      <div id="mainAddTask">
-        
+      <div id="blurBackground" class="visible"></div>
+      <div id="mainAddTask" class="visible">
+        <div class="mainAddTaskHeader">
+          <p>Add New Task</p>
+          <div id="exitAddTask"></div>
+        </div>
+        <div id="newTaskForm">
+            <input type="text" id="taskName" name="task" required
+              placeholder="Task Name">
+            <textarea rows="4" cols="50" id="info" name="info" required
+              placeholder="Task Description"></textarea>
+            <label for="date">Due Date:</label>
+            <input type="date" id="date" name="date">
+            <br>
+
+            <div id="bottomOfFOrm">
+              
+            <div id="priorityLvlDiv">
+              <div class="lowPriorityBtn priorityLvl"><p>Low</p></div>
+              <div class="mediumPriorityBtn priorityLvl"><p>Medium</p></div>
+              <div class="highPriorityBtn priorityLvl"><p>High</p></div>
+            </div>
+
+            <button id="addTaskForm">Add Task</button>
+
+          </div>
+
+
+
+            
+        </div>
       </div>
 
 
