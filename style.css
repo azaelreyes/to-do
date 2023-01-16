@@ -1,0 +1,236 @@
+body{
+  margin-top: -3vh;
+  margin-left:0 ;
+  margin-bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#header{
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(219, 81, 81);
+  width: 100vw;
+  height: 70px;
+  color: white;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.toDoLogo{
+  background-image: url(./img/checklist.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 70px;
+  height: 5vh; 
+}
+#sidebar{
+  width: 260px;
+  height: 90vh;
+  background-color: rgb(231, 231, 231);
+  padding-top: 3vh;
+}
+
+.sidebarItem{
+  display: flex;
+  flex-wrap: wrap;
+  width: 220px;
+  height: 3vh;
+  background-color: whitesmoke;
+  color:rgb(89, 89, 89);
+  margin-bottom: 2vh;
+  margin-left: 10px;
+  border-radius: 10px;
+  padding: 1vh;
+  align-content: center;
+}
+.sidebarItem:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+.sideBarItemIcon{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 4vh;
+  width: 4vh;
+  margin-top: 1vh;
+  margin-right: 10px;
+}
+
+.inbox{background-image: url(./img/inbox.svg);}
+.today{background-image: url(./img/today.svg);}
+.week{background-image: url(./img/week.svg);}
+.important{background-image: url(./img/important.svg);}
+.done{background-image: url(./img/done.svg);}
+
+#addCircle{
+  background-image: url(./img/addCircle.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 140px;
+  height: 10vh; 
+  position: absolute;
+  margin-top: -15vh;
+  margin-left: 130px;
+}
+#projects{
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.projectList{
+  max-height: 30vh;
+  overflow-y: auto;
+}
+#projectsTitle{
+  color: rgb(89, 89, 89);
+  font-size: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: -15px;
+}
+hr{
+  border-width: 1px;
+  border-color: rgb(209, 205, 205);
+  border-radius: 10px;
+}
+.addProject{
+  background-image: url(./img/addProject.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40px;
+  height: 4vh; 
+  margin-left: 80px;
+}
+.projectItem{
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  
+  height: 45px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left: 10px;
+
+}
+.projectItem:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+
+.editProject{background-image: url(./img/edit.svg);}
+.deleteProject{background-image: url(./img/delete.svg);}
+.projectEditDelete{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 25px;
+  width: 25px;
+  margin-right: 10px;
+  
+}
+.projectIcons{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+}
+#mainTasks{
+  height: 93vh;
+  margin-left:260px;
+  margin-top: -93vh;
+}
+.taskTitleIcon{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+}
+#mainTasksTitle{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  color:rgb(89, 89, 89);
+}
+#taskListTitle{
+  margin-top:-30px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+#taskListTitle >p{
+  font-size: 20px;
+  color:rgb(89, 89, 89);
+}
+#taskList{
+  margin-top: 30px;
+  overflow-y: auto;
+  max-height: 65vh;
+}
+.task{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  width: 92%;
+  margin-left: 4%;
+  background-color:rgb(236, 236, 236);
+  color:rgb(89, 89, 89);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.task:hover{box-shadow: 10px 5px 5px rgb(89, 89, 89);}
+.highPriority{border-left: 15px solid rgb(233, 94, 94);}
+.mediumPriority{border-left: 15px solid rgb(123, 235, 123);}
+.lowPriority{border-left: 15px solid rgb(62, 205, 252);}
+.taskIconsDiv{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+}
+.taskIcon{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+.infoTaskIcon{ background-image: url(./img/info.svg);}
+.editTaskIcon{ background-image: url(./img/edit.svg);}
+.deleteTaskIcon{ background-image: url(./img/delete.svg);}
+.taskTitle{
+  margin-left: 10px;
+}
+.taskCheckBox{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 30px;
+  width: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.unselectedCheckBox{background-image: url(./img/emptyCheckBox.svg);}
+.selectedCheckBox{background-image: url(./img/filledCheckBox.svg);}
+.date{
+  margin-right: 10px;
+}
+/* Visible & Hidden Toggles */
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear .7s, opacity .7s;
+  transition-delay: .6s;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear .7s, opacity .7s;
+}
+#mainAddTask{}
