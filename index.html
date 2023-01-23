@@ -113,7 +113,7 @@
         <div id="taskList">
             <div class="task mediumPriority">
                 <div class="taskCheckBox unselectedCheckBox"></div>
-                <p class="taskTitle">Example Task 1</p>
+                <p class="taskTitle">Example HTML Task</p>
 
                 <div class="taskIconsDiv">
                   <div class="date">Jan 15th</div>
@@ -122,135 +122,13 @@
                   <div class="taskIcon deleteTaskIcon"></div>
                 </div>          
             </div>
-            <div class="task highPriority">
-              <div class="taskCheckBox unselectedCheckBox"></div>
-              <p class="taskTitle">Example Task 2</p>
-
-              <div class="taskIconsDiv">
-                <div class="date">Jan 25th</div>
-                <div class="taskIcon infoTaskIcon"></div>
-                <div class="taskIcon editTaskIcon"></div>
-                <div class="taskIcon deleteTaskIcon"></div>
-              </div>          
-            </div>
-            <div class="task lowPriority">
-            <div class="taskCheckBox unselectedCheckBox"></div>
-            <p class="taskTitle">Example Task 3</p>
-
-            <div class="taskIconsDiv">
-              <div class="date">Feb 15th</div>
-              <div class="taskIcon infoTaskIcon"></div>
-              <div class="taskIcon editTaskIcon"></div>
-              <div class="taskIcon deleteTaskIcon"></div>
-            </div>          
-            </div>
-            <div class="task highPriority">
-              <div class="taskCheckBox unselectedCheckBox"></div>
-              <p class="taskTitle">Example Task 4</p>
-
-              <div class="taskIconsDiv">
-                <div class="date">Jan 19th</div>
-                <div class="taskIcon infoTaskIcon"></div>
-                <div class="taskIcon editTaskIcon"></div>
-                <div class="taskIcon deleteTaskIcon"></div>
-              </div>          
-            </div>
-            <div class="task lowPriority">
-              <div class="taskCheckBox unselectedCheckBox"></div>
-              <p class="taskTitle">Example Task 5</p>
-
-              <div class="taskIconsDiv">
-                <div class="date">Mar 15th</div>
-                <div class="taskIcon infoTaskIcon"></div>
-                <div class="taskIcon editTaskIcon"></div>
-                <div class="taskIcon deleteTaskIcon"></div>
-              </div>          
-            </div>
-            <div class="task mediumPriority">
-            <div class="taskCheckBox unselectedCheckBox"></div>
-            <p class="taskTitle">Example Task 6</p>
-
-            <div class="taskIconsDiv">
-              <div class="date">Jun 15th</div>
-              <div class="taskIcon infoTaskIcon"></div>
-              <div class="taskIcon editTaskIcon"></div>
-              <div class="taskIcon deleteTaskIcon"></div>
-            </div>          
-            </div>
-            <div class="task mediumPriority">
-              <div class="taskCheckBox unselectedCheckBox"></div>
-              <p class="taskTitle">Example Task 7</p>
-
-              <div class="taskIconsDiv">
-                <div class="date">Jan 30th</div>
-                <div class="taskIcon infoTaskIcon"></div>
-                <div class="taskIcon editTaskIcon"></div>
-                <div class="taskIcon deleteTaskIcon"></div>
-              </div>          
-          </div>
-          <div class="task highPriority">
-            <div class="taskCheckBox unselectedCheckBox"></div>
-            <p class="taskTitle">Example Task 8</p>
-
-            <div class="taskIconsDiv">
-              <div class="date">Apr 30th</div>
-              <div class="taskIcon infoTaskIcon"></div>
-              <div class="taskIcon editTaskIcon"></div>
-              <div class="taskIcon deleteTaskIcon"></div>
-            </div>          
-          </div>
-          <div class="task lowPriority">
-          <div class="taskCheckBox unselectedCheckBox"></div>
-          <p class="taskTitle">Example Task 9</p>
-
-          <div class="taskIconsDiv">
-            <div class="date">Dec 2nd</div>
-            <div class="taskIcon infoTaskIcon"></div>
-            <div class="taskIcon editTaskIcon"></div>
-            <div class="taskIcon deleteTaskIcon"></div>
-          </div>          
-          </div>
-          <div class="task highPriority">
-            <div class="taskCheckBox unselectedCheckBox"></div>
-            <p class="taskTitle">Example Task 10</p>
-
-            <div class="taskIconsDiv">
-              <div class="date">Nov 30th</div>
-              <div class="taskIcon infoTaskIcon"></div>
-              <div class="taskIcon editTaskIcon"></div>
-              <div class="taskIcon deleteTaskIcon"></div>
-            </div>          
-          </div>
-          <div class="task lowPriority">
-            <div class="taskCheckBox unselectedCheckBox"></div>
-            <p class="taskTitle">Example Task 11</p>
-
-            <div class="taskIconsDiv">
-              <div class="date">Oct 20th</div>
-              <div class="taskIcon infoTaskIcon"></div>
-              <div class="taskIcon editTaskIcon"></div>
-              <div class="taskIcon deleteTaskIcon"></div>
-            </div>          
-          </div>
-          <div class="task mediumPriority">
-          <div class="taskCheckBox unselectedCheckBox"></div>
-          <p class="taskTitle">Example Task 12</p>
-
-          <div class="taskIconsDiv">
-            <div class="date">Sep 3rd</div>
-            <div class="taskIcon infoTaskIcon"></div>
-            <div class="taskIcon editTaskIcon"></div>
-            <div class="taskIcon deleteTaskIcon"></div>
-          </div>          
-          </div>
-
         </div>
         
       </div>
 
       <!-- Add Task Pop Up -->
-      <div id="blurBackground" class="visible"></div>
-      <div id="mainAddTask" class="visible">
+      <div id="blurBackground" class="hidden"></div>
+      <div id="mainAddTask" class="hidden">
         <div class="mainAddTaskHeader">
           <p>Add New Task</p>
           <div id="exitAddTask"></div>
@@ -267,18 +145,28 @@
             <div id="bottomOfFOrm">
               
             <div id="priorityLvlDiv">
-              <div class="lowPriorityBtn priorityLvl"><p>Low</p></div>
-              <div class="mediumPriorityBtn priorityLvl"><p>Medium</p></div>
-              <div class="highPriorityBtn priorityLvl"><p>High</p></div>
+              <button class="lowPriorityBtn priorityLvl">Low</button>
+              <button class="mediumPriorityBtn priorityLvl">Medium</button>
+              <button class="highPriorityBtn priorityLvl">High</button>
             </div>
 
             <button id="addTaskForm">Add Task</button>
 
-          </div>
+            </div>
 
 
 
             
+        </div>
+      </div>
+      <!-- View Task Pop Up -->
+      <div id="taskInfoPopUp" class="hidden">
+        <div id="taskInfoPopUpHeader">
+          <p></p>
+          <div id="taskInfoPopUpExit"></div>
+        </div>
+        <div id="taskInfoPopUpInfo">
+
         </div>
       </div>
 

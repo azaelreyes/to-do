@@ -73,11 +73,11 @@ body{
   margin-top: -13vh;
   margin-left: 160px;
   border-radius: 100px;
+  transition: all .2s ease-in-out;
 }
 #addCircle:hover{
-  box-shadow: 10px 10px 10px rgb(151, 148, 148);
-  width: 65px;
-  height: 65px;
+  box-shadow: 3px 3px 3px rgb(151, 148, 148);
+  transform: scale(1.1);
 }
 #projects{
   margin-top: 20px;
@@ -185,13 +185,18 @@ hr{
   justify-content: center;
   align-content: center;
   width: 92%;
+  height: 40px;
   margin-left: 4%;
   background-color:rgb(236, 236, 236);
   color:rgb(89, 89, 89);
   border-radius: 10px;
   margin-bottom: 20px;
+  transition: all .2s ease-in-out;
 }
-.task:hover{box-shadow: 5px 5px 5px rgb(89, 89, 89);}
+.task:hover{
+  box-shadow: 5px 5px 5px rgb(89, 89, 89);
+  transform: scale(1.03);
+}
 .highPriority{border-left: 15px solid rgb(233, 94, 94);}
 .mediumPriority{border-left: 15px solid rgb(123, 235, 123);}
 .lowPriority{border-left: 15px solid rgb(62, 205, 252);}
@@ -208,7 +213,10 @@ hr{
   height: 30px;
   width: 30px;
   margin-right: 10px;
-}
+
+  transition: all .2s ease-in-out;}
+.taskIcon:hover{ transform: scale(1.25); }
+
 .infoTaskIcon{ background-image: url(./img/info.svg);}
 .editTaskIcon{ background-image: url(./img/edit.svg);}
 .deleteTaskIcon{ background-image: url(./img/delete.svg);}
@@ -229,19 +237,8 @@ hr{
 .date{
   margin-right: 10px;
 }
-/* Visible & Hidden Toggles */
-.visible {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility .7s linear .7s, opacity .7s;
-}
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility .7s linear .7s, opacity .7s;
 
-}
-#mainAddTask{
+#mainAddTask, #taskInfoPopUp{
   position: absolute;
   height: 400px;
   width: 600px;
@@ -254,6 +251,7 @@ hr{
   margin-bottom: auto;
   margin-left: auto; 
   margin-right: auto; 
+  border-radius:10px;
 }
 #blurBackground{
   position: absolute;
@@ -270,7 +268,7 @@ hr{
   margin-left: auto; 
   margin-right: auto;
 }
-.mainAddTaskHeader{
+.mainAddTaskHeader, #taskInfoPopUpHeader{
   height: 55px;
   width: 600px;
   background-color: rgb(219, 81, 81);
@@ -279,24 +277,34 @@ hr{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   
 }
 .mainAddTaskHeader > p{
   margin-left: 15px;
 }
-#exitAddTask{
+#exitAddTask, #taskInfoPopUpExit{
   background-image: url(./img/exit.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   height: 30px;
   width: 30px;
-  margin-left: 410px;
+
+  display: inline-block;
+  margin: 0 10px 0 auto;
+  transition:all .2s ease-in-out
 }
+#exitAddTask:hover, #taskInfoPopUpExit:hover{
+  transform: scale(1.3);
+}
+
 #newTaskForm{
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
+
 }
 #info{
   width: 540px;
@@ -305,6 +313,10 @@ hr{
   padding-top: 10px;
   margin-top: 20px;
   font-size: large;
+  border-radius:10px;
+  border: 0px;
+
+
 }
 
 #taskName{
@@ -312,55 +324,77 @@ hr{
   width: 540px ;
   padding-left: 15px;
   font-size: larger;
+  border-radius:10px;
+  border: 0px;
+
 }
 #date{
   width: 120px;
   height: 30px;
   padding-left: 15px;
   margin-top: 20px;
+  border-radius:10px;
+  border: 0px;
+  padding-right: 10px;
+
   
 }
 #addTaskForm{
   width: 120px;
-  height: 30px;
-  margin-top: 20px;
+  height: 40px;
+  border-radius:10px;
+  border:  solid 3px;
+  background-color: rgb(159, 202, 143);
+  color:white;
+  float: right;
 }
 
 #priorityLvlDiv{
   display: flex;
   flex-wrap: wrap;
-  width: 420px;
-  
-}
-#priorityLvlDiv > div> p{
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  left: auto;
-  margin-right:auto;
+  width: 350px;
 }
 #bottomOfFOrm{
   display: flex;
   flex-wrap: wrap;
-  width: 540px;
+  align-items: center;
+  width: 560px;
+  height: 60px;
 }
 .priorityLvl{
-  width: 70px;
-  height: 20px;
-  margin-right: 15px;
-  margin-top: 20px;
+  width: 100px;
+  height: 35px;
+  margin-right: 5px;
+  border-radius:10px;
+  border: 0px;
 }
+.priorityLvl:hover{color:white}
 .highPriorityBtn{
   border: 3px solid rgb(233, 94, 94);
   color:rgb(233, 94, 94);
 }
+.highPriorityBtn:hover{background-color: rgb(233, 94, 94);}
 .mediumPriorityBtn{
   border: 3px solid rgb(123, 235, 123);
   color:rgb(123, 235, 123);
 }
+.mediumPriorityBtn:hover{background-color: rgb(123, 235, 123);}
 .lowPriorityBtn{
   border: 3px solid rgb(62, 205, 252);
   color:rgb(62, 205, 252);
 }
+.lowPriorityBtn:hover{background-color: rgb(62, 205, 252);}
 label{
   color:rgb(89, 89, 89);
+}
+/* Visible & Hidden Toggles */
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility .7s, linear .7s, opacity .7s;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .7s, linear .7s, opacity .7s;
 }
