@@ -294,10 +294,11 @@ hr{
 
   display: inline-block;
   margin: 0 10px 0 auto;
-  transition:all .2s ease-in-out
+  transition: all .5s ease-in-out
 }
 #exitAddTask:hover, #taskInfoPopUpExit:hover{
   transform: scale(1.3);
+  transform: rotate(180deg)
 }
 
 #newTaskForm{
@@ -315,9 +316,8 @@ hr{
   font-size: large;
   border-radius:10px;
   border: 0px;
-
-
 }
+#info:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 
 #taskName{
   height: 30px;
@@ -326,8 +326,8 @@ hr{
   font-size: larger;
   border-radius:10px;
   border: 0px;
-
 }
+#taskName:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 #date{
   width: 120px;
   height: 30px;
@@ -335,18 +335,22 @@ hr{
   margin-top: 20px;
   border-radius:10px;
   border: 0px;
-  padding-right: 10px;
-
-  
+  padding-right: 10px; 
 }
+#date:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 #addTaskForm{
-  width: 120px;
+  width: 130px;
   height: 40px;
   border-radius:10px;
-  border:  solid 3px;
+  border:  solid 3px rgb(159, 202, 143) ;
   background-color: rgb(159, 202, 143);
   color:white;
-  float: right;
+  margin-right: 10px; 
+  transition: all .2s ease-in-out; 
+}
+#addTaskForm:hover{
+  transform: scale(1.1); 
+  box-shadow: 2px 2px 2px rgb(89, 89, 89);
 }
 
 #priorityLvlDiv{
@@ -360,6 +364,8 @@ hr{
   align-items: center;
   width: 560px;
   height: 60px;
+  margin-top: 15px;
+  justify-content: space-between;
 }
 .priorityLvl{
   width: 100px;
@@ -368,24 +374,86 @@ hr{
   border-radius:10px;
   border: 0px;
 }
-.priorityLvl:hover{color:white}
-.highPriorityBtn{
+.priorityLvl:hover{color:white; box-shadow: 2px 2px 2px rgb(89, 89, 89);}
+.highClass{
   border: 3px solid rgb(233, 94, 94);
   color:rgb(233, 94, 94);
+  
 }
-.highPriorityBtn:hover{background-color: rgb(233, 94, 94);}
-.mediumPriorityBtn{
+.highClass:hover{background-color: rgb(233, 94, 94);}
+.mediumClass{
   border: 3px solid rgb(123, 235, 123);
   color:rgb(123, 235, 123);
 }
-.mediumPriorityBtn:hover{background-color: rgb(123, 235, 123);}
-.lowPriorityBtn{
+.mediumClass:hover{background-color: rgb(123, 235, 123);}
+.lowClass{
   border: 3px solid rgb(62, 205, 252);
   color:rgb(62, 205, 252);
 }
-.lowPriorityBtn:hover{background-color: rgb(62, 205, 252);}
+.lowClass:hover{background-color: rgb(62, 205, 252);}
 label{
   color:rgb(89, 89, 89);
+}
+
+.clicked-highPriorityBtn{background-color: rgb(233, 94, 94); color:white;}
+.clicked-mediumPriorityBtn{background-color: rgb(123, 235, 123);color:white;}
+.clicked-lowPriorityBtn{background-color: rgb(62, 205, 252); color:white;}
+
+#taskInfoPopUpInfo{
+  height: 250px;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: rgb(89, 89, 89);
+  overflow-y: auto;
+}
+
+.taskInfoPopUpFooter{
+  height: 95px;
+  width: 600px;
+  color: rgb(89, 89, 89);
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.taskInfoPopUpFooterDateDiv{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-left: 5%;
+  
+}
+.taskInfoPopUpInfoPriorityDiv{
+  padding-right: 3%;
+}
+
+.taskInfoPopUpInfoPriority-priorityLvl{
+  width: 140px;
+  height: 35px;
+  margin-right: 5px;
+  border-radius:10px;
+  font-size: medium;
+
+  border: 3px solid white;
+  color:white;
+}
+.taskInfoPopUpInfoPriority-highPriority{background-color: rgb(233, 94, 94);}
+.taskInfoPopUpInfoPriority-mediumPriority{background-color: rgb(123, 235, 123);}
+.taskInfoPopUpInfoPriority-lowPriority{background-color: rgb(62, 205, 252);}
+
+#taskInfoPopUpInfoPriority{
+  text-align: center;
+  line-height: 35px;
+  margin-top: 0;
+  border-radius:10px;
+}
+
+#taskInfoPopUpInfoDate{
+  padding-left: 10px;
+}
+#taskInfoPopUpHeaderTitle{
+  font-weight: bold;
 }
 /* Visible & Hidden Toggles */
 .visible {

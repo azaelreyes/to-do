@@ -111,7 +111,7 @@
         </div>
 
         <div id="taskList">
-            <div class="task mediumPriority">
+            <!-- <div class="task mediumPriority">
                 <div class="taskCheckBox unselectedCheckBox"></div>
                 <p class="taskTitle">Example HTML Task</p>
 
@@ -121,14 +121,18 @@
                   <div class="taskIcon editTaskIcon"></div>
                   <div class="taskIcon deleteTaskIcon"></div>
                 </div>          
-            </div>
+            </div> -->
         </div>
         
       </div>
 
+
+
+
       <!-- Add Task Pop Up -->
-      <div id="blurBackground" class="hidden"></div>
-      <div id="mainAddTask" class="hidden">
+      <div id="blurBackground" class="visible"></div>
+
+      <div id="mainAddTask" class="visible">
         <div class="mainAddTaskHeader">
           <p>Add New Task</p>
           <div id="exitAddTask"></div>
@@ -144,33 +148,46 @@
 
             <div id="bottomOfFOrm">
               
-            <div id="priorityLvlDiv">
-              <button class="lowPriorityBtn priorityLvl">Low</button>
-              <button class="mediumPriorityBtn priorityLvl">Medium</button>
-              <button class="highPriorityBtn priorityLvl">High</button>
+                <div id="priorityLvlDiv">
+                  <button id="lowPriorityBtn" class=" priorityLvl lowClass">Low</button>
+                  <button id="mediumPriorityBtn" class="priorityLvl mediumClass">Medium</button>
+                  <button id="highPriorityBtn" class="priorityLvl highClass">High</button>
+                </div>
+
+                <button id="addTaskForm">Add Task</button>
+
             </div>
-
-            <button id="addTaskForm">Add Task</button>
-
-            </div>
-
-
-
             
         </div>
       </div>
+
+
+
+
       <!-- View Task Pop Up -->
       <div id="taskInfoPopUp" class="hidden">
         <div id="taskInfoPopUpHeader">
-          <p></p>
+          <p id="taskInfoPopUpHeaderTitle"></p>
           <div id="taskInfoPopUpExit"></div>
         </div>
         <div id="taskInfoPopUpInfo">
-
+          <p id="taskInfoPopUpInfoDescription"></p>
         </div>
+        <div class="taskInfoPopUpFooter">
+          <div class="taskInfoPopUpFooterDateDiv">
+              <p>Due:</p>
+              <p id="taskInfoPopUpInfoDate" ></p>
+          </div>
+          <div class="taskInfoPopUpInfoPriorityDiv"> 
+              <div class="taskInfoPopUpInfoPriority-priorityLvl ">
+                <p id="taskInfoPopUpInfoPriority"></p>
+              </div>
+          </div>
+          
+      </div>
       </div>
 
 
-    <script src="main.js"></script>  
+    <script src="main.js" defer></script>  
   </body>
 </html>
