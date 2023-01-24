@@ -1,5 +1,7 @@
-import {activateAddTaskButton, logs, displayToDoTasksArray, activateDetailsButton} from './appLogic';
+import {activateAddTaskButton, logs, displayToDoTasksArray, addTask} from './appLogic.js';
 
 activateAddTaskButton();
 logs();
 displayToDoTasksArray();
+
+addTask();
