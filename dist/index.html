@@ -187,6 +187,39 @@
       </div>
       </div>
 
+      <!-- Edit Task Pop Up -->
+      <div id="taskEditPopUp" class="hidden">
+        <div class="taskEditPopUpHeader">
+          <p>Edit Task</p>
+          <div id="exitEditTask"></div>
+        </div>
+        <div id="editTaskForm">
+            <input type="text" id="taskName_EditForm" name="task" required
+              placeholder="Task Name">
+            <textarea rows="4" cols="50" id="info_EditForm" name="info" required
+              placeholder="Task Description"></textarea>
+            <label for="date">Due Date:</label>
+            <input type="date" id="date_EditForm" name="date">
+            <br>
+
+            <div id="taskEditPopUpFooter">
+              
+                <div id="priorityLvlDiv_EditForm">
+                  <button id="lowPriorityBtn_EditForm" class=" priorityLvl lowClass_EditForm">Low</button>
+                  <button id="mediumPriorityBtn_EditForm" class="priorityLvl mediumClass_EditForm">Medium</button>
+                  <button id="highPriorityBtn_EditForm" class="priorityLvl highClass_EditForm">High</button>
+                </div>
+
+                <button id="confirmEditBtn">Confirm Edit</button>
+
+            </div>
+            
+        </div>
+          </div>
+          
+      </div>
+      </div>
+
 
     <script src="main.js" defer></script>  
   </body>

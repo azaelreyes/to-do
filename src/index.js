@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
-import {toggleAddTaskAndTaskInfoPopUp, displayToDoTasksArray, addTask} from './appLogic.js';
+import {toggle_Add_Info_Edit_PopUp, displayToDoTasksArray, addTask} from './appLogic.js';
 
-toggleAddTaskAndTaskInfoPopUp();
+toggle_Add_Info_Edit_PopUp();
 displayToDoTasksArray();
 addTask();
