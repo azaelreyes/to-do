@@ -191,12 +191,21 @@ hr{
   color:rgb(89, 89, 89);
   border-radius: 10px;
   margin-bottom: 20px;
-  transition: all .2s ease-in-out;
+  transition: all .1s ease-in-out;
 }
+
+.taskWhenChecked{
+  text-decoration: line-through;
+  background-color: lightgrey;
+  filter:brightness(50%);
+  filter: grayscale(1);
+}
+
 .task:hover{
   box-shadow: 5px 5px 5px rgb(89, 89, 89);
   transform: scale(1.03);
 }
+
 .highPriority{border-left: 15px solid rgb(233, 94, 94);}
 .mediumPriority{border-left: 15px solid rgb(123, 235, 123);}
 .lowPriority{border-left: 15px solid rgb(62, 205, 252);}
