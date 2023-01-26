@@ -15,23 +15,23 @@
      <!-- SideBar -->
      <div id="sidebar">
 
-        <div class = "sidebarItem">
+        <div id="allFilter"class = "sidebarItem">
           <div class="inbox sideBarItemIcon"></div>
           <p>All</p>
         </div>
-        <div class = "sidebarItem">
+        <div id="todayFilter" class = "sidebarItem">
           <div class="today sideBarItemIcon"></div>
           <p>Today</p>
         </div>
-        <div class = "sidebarItem">
+        <div id="weekFilter" class = "sidebarItem">
           <div class="week sideBarItemIcon"></div>
           <p>Week</p>
         </div>
-        <div class = "sidebarItem">
+        <div id="importantFilter" class = "sidebarItem">
           <div class="important sideBarItemIcon"></div>
           <p>Important</p>
         </div>
-        <div class = "sidebarItem">
+        <div id="completedFilter" class = "sidebarItem">
           <div class="done sideBarItemIcon"></div>
           <p>Completed</p>
         </div>
@@ -126,12 +126,8 @@
         
       </div>
 
-
-
-
-      <!-- Add Task Pop Up -->
       <div id="blurBackground" class="hidden"></div>
-
+      <!-- Add Task Pop Up -->
       <div id="mainAddTask" class="hidden">
         <div class="mainAddTaskHeader">
           <p>Add New Task</p>
@@ -160,10 +156,6 @@
             
         </div>
       </div>
-
-
-
-
       <!-- View Task Pop Up -->
       <div id="taskInfoPopUp" class="hidden">
         <div id="taskInfoPopUpHeader">
@@ -186,7 +178,6 @@
           
       </div>
       </div>
-
       <!-- Edit Task Pop Up -->
       <div id="taskEditPopUp" class="hidden">
         <div class="taskEditPopUpHeader">
@@ -209,16 +200,22 @@
                   <button id="mediumPriorityBtn_EditForm" class="priorityLvl mediumClass_EditForm">Medium</button>
                   <button id="highPriorityBtn_EditForm" class="priorityLvl highClass_EditForm">High</button>
                 </div>
-
-                <button id="confirmEditBtn">Confirm Edit</button>
-
             </div>
             
         </div>
           </div>
-          
-      </div>
-      </div>
+      <!-- Delete Task Pop Up -->
+      <div id="taskDeletePopUp" class="hidden">
+          <div id="taskDeletePopUpHeader">
+            <p id="taskInfoPopUpHeaderTitle">Delete this task?</p>
+            <div id="taskDeletePopUpExit"></div>
+          </div>
+          <div id="taskDeletePopUpConfirm">
+            <button id="cancelDeletion"  class="deletePopUpConfirmButtons">Cancel</button>
+            <!-- <button id="confirmDeletion" class="deletePopUpConfirmButtons">Delete</button> -->
+          </div>
+            
+      </div>   
 
 
     <script src="main.js" defer></script>  
