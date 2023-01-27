@@ -7,3 +7,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
 };
+module.exports = {
+  // other webpack options ...
+  devtool: 'inline-source-map',
+  // ...
+};
