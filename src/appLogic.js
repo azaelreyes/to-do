@@ -1,8 +1,9 @@
 import { debounce } from "lodash";
-import { format } from 'date-fns';
+import { format, addDays } from 'date-fns';
 
 
-let toDoTasksArray = []; //store All Tasks here.
+let allTasksArray = []; //store All Tasks here.
+
 
 //To Do Task Factory 
 const toDoFactory = (title, description, dueDate, priority, checked) => {
@@ -15,8 +16,8 @@ const exampleTask2 = toDoFactory("Example JS 2", "Example Description 2 " +sampl
 const exampleTask3 = toDoFactory("Example JS 3", "Example Description 3 " +sampleDescription, new Date('2023-06-21'), "lowPriority", false);
 const exampleTask4 = toDoFactory("Example JS 4", "Example Description 4 " +sampleDescription, new Date('2023-11-11'), "mediumPriority", false);
 const exampleTask5 = toDoFactory("Example JS 5", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", false);
-const exampleTask6 = toDoFactory("Example JS 6", "Example Description 6 " +sampleDescription, new Date('2023-01-26'), "highPriority", false);
-toDoTasksArray.push(exampleTask1, exampleTask2, exampleTask3, exampleTask4, exampleTask5, exampleTask6);
+const exampleTask6 = toDoFactory("Example JS 6", "Example Description 6 " +sampleDescription, new Date('01-26-23'), "highPriority", false);
+allTasksArray.push(exampleTask1, exampleTask2, exampleTask3, exampleTask4, exampleTask5, exampleTask6);
 
 
 const taskList = document.getElementById("taskList");
@@ -44,228 +45,234 @@ const completedFilter = document.getElementById("completedFilter");
 
 const sidebarFilters = ()=>{
     let freshStart = true;
-
-    if(freshStart){
-        displayAllTasks(); 
-        freshStart=false;
-    }
+    if(freshStart){displayAllTasks(); freshStart=false;};
 
     allFilter.addEventListener("click", displayAllTasks);
     todayFilter.addEventListener("click", displayTodayTasks);
     weekFilter.addEventListener("click", displayWeekTasks);
     importantFilter.addEventListener("click", displayImportantTasks);
     completedFilter.addEventListener("click", displayCompletedTasks);
+};
+const displayAllTasks = () =>{
+    document.querySelectorAll(".task").forEach(element =>{element.remove()})
+    allTasksArray.forEach((element,index) =>{ createTask(element)});
+
+    //🚨🚨🚨🚨🚨 Change the top Label
+};
+const displayCompletedTasks = () =>{
+    document.querySelectorAll(".task").forEach(element =>{element.remove()})
+    allTasksArray.forEach(element=>{if(element.checked){createTask(element);};})
+};
+const displayImportantTasks = () =>{
+    document.querySelectorAll(".task").forEach(element =>{element.remove()})
+    allTasksArray.forEach(element=>{if(element.priority == "highPriority"){createTask(element);};})
+};
+const displayTodayTasks = () =>{
+    // const todaysDate= format(  addDays((new Date()), 1)    , "MM-dd-yy"); 
+    const today= format((new Date()), "MM-dd-yy");
+    document.querySelectorAll(".task").forEach(element =>{element.remove()})
+    allTasksArray.forEach((element) =>{ 
+        const dueDate = format(addDays((new Date(element.dueDate)),1),  "MM-dd-yy");
+        if(dueDate == today ){ createTask(element)};
+    });
+}
+const displayWeekTasks = () =>{console.log("Week Filter Clicked")};
+
+
+const createTask = (element) =>{
+
+    const taskDiv = document.createElement("div");
+    taskList.appendChild(taskDiv);
+    taskDiv.classList.add("task");
+    taskDiv.classList.add(element.priority);
+    const pForTitle = document.createElement("p");
+    pForTitle.classList.add("taskTitle");
+    pForTitle.innerHTML = element.title; //title
+    const taskIconsDiv = document.createElement("div")
+    taskIconsDiv.classList.add("taskIconsDiv");
+    const dateDisplay = document.createElement("div");
+    const infoIcon = document.createElement("div");
+    const editIcon = document.createElement("div");
+    const deleteIcon = document.createElement("div");
+    dateDisplay.classList.add("date");
+    const dueDate = format(addDays((new Date(element.dueDate)),1),  "MM-dd-yy")
+    dateDisplay.innerHTML = dueDate; //date
+    infoIcon.classList.add("taskIcon", "infoTaskIcon");
+    editIcon.classList.add("taskIcon", "editTaskIcon");
+    deleteIcon.classList.add("taskIcon", "deleteTaskIcon");
+    taskIconsDiv.append(dateDisplay, infoIcon, editIcon, deleteIcon)
+    
+    //Code for Check & Uncheck Feature
+    const checkBox = document.createElement("div");
+    if(element.checked==true){
+        checkBox.classList.add("taskCheckBox","selectedCheckBox");   
+        taskDiv.classList.add("taskWhenChecked");   
+    } else{
+        checkBox.classList.add("taskCheckBox","unselectedCheckBox");
+        taskDiv.classList.remove("taskWhenChecked");
+    };
+    checkBox.addEventListener("click", ()=>{
+        if(checkBox.classList.contains("unselectedCheckBox")){
+            checkBox.classList.replace("unselectedCheckBox","selectedCheckBox");
+            taskDiv.classList.add("taskWhenChecked");
+            element.checked = true;
+        } else if(checkBox.classList.contains("selectedCheckBox")){
+            checkBox.classList.replace("selectedCheckBox","unselectedCheckBox");
+            taskDiv.classList.remove("taskWhenChecked");
+            element.checked = false;
+        };
+    });
+
+    taskDiv.append(checkBox, pForTitle, taskIconsDiv);
+
+    //This is eventlistener for Info Icon
+    infoIcon.addEventListener("click", ()=>{
+
+        taskInfoPopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible");
+        taskInfoPopUpHeaderTitle.innerHTML= element.title;
+        taskInfoPopUpHeaderTitle.style.marginLeft = "20px";
+        taskInfoPopUpInfoDescription.innerHTML = element.description;
+        taskInfoPopUpInfoDate.innerHTML = dueDate;
+        if(element.priority == "highPriority"){
+            taskInfoPopUpInfoPriority.innerHTML="High Priority";
+            taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-mediumPriority","taskInfoPopUpInfoPriority-lowPriority");
+            taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-highPriority");
+        } else if(element.priority == "mediumPriority"){
+            taskInfoPopUpInfoPriority.innerHTML="Medium Priority";
+            taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-highPriority","taskInfoPopUpInfoPriority-lowPriority");
+            taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-mediumPriority");
+        } else{
+            taskInfoPopUpInfoPriority.innerHTML="Low Priority";
+            taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-highPriority","taskInfoPopUpInfoPriority-mediumPriority");
+            taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-lowPriority");
+        }
+    });
+    //This is eventlistener for Edit Icon
+    editIcon.addEventListener("click", ()=>{
+        //checks if a confirm button is already there.
+        if(document.getElementById("confirmEditBtn")){
+            document.getElementById("confirmEditBtn").remove();
+        }
+        //lets put this in a function
+
+        const confirmEditBtn = document.createElement("button")
+        confirmEditBtn.setAttribute("id","confirmEditBtn");
+        confirmEditBtn.innerHTML = "Confirm Edit";
+        taskEditPopUpFooter.appendChild(confirmEditBtn);
+            
+        // Show Edit Task Pop Up...
+        taskEditPopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible");
+
+        // Edit Task Form is Preloaded with current data from this element...
+        taskName_EditForm.value = element.title;
+        info_EditForm.value = element.description;
+        date_EditForm.value = (format(((new Date(element.dueDate))),"yyyy-MM-dd"));
+        
+        // Prioriity is preloaded with current priority from this element...
+        if(element.priority == "highPriority"){
+            highPriorityBtn_EditForm.classList.replace("highClass_EditForm","clicked-highPriorityBtn");
+            mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
+            lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
+            
+        } else if(element.priority == "mediumPriority"){
+            mediumPriorityBtn_EditForm.classList.replace("mediumClass_EditForm","clicked-mediumPriorityBtn");
+            highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
+            lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
+        } else{
+            lowPriorityBtn_EditForm.classList.replace( "lowClass_EditForm","clicked-lowPriorityBtn");
+            highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
+            mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
+        };
+
+        //these event listeners switch the priority toggle.
+        let priorityOfTask2 = "";
+        //Checks and Switches priority to temporary variable if priority is changed... 
+        lowPriorityBtn_EditForm.addEventListener("click", ()=>{
+            lowPriorityBtn_EditForm.classList.replace( "lowClass_EditForm","clicked-lowPriorityBtn");
+            highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
+            mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
+            priorityOfTask2 = "lowPriority";
+
+        });
+        //Checks and Switches priority to temporary variable if priority is changed... 
+
+        mediumPriorityBtn_EditForm.addEventListener("click", ()=>{
+            mediumPriorityBtn_EditForm.classList.replace("mediumClass_EditForm","clicked-mediumPriorityBtn");
+            highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
+            lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
+            priorityOfTask2= "mediumPriority";
+
+        });
+        //Checks and Switches priority to temporary variable if priority is changed... 
+
+        highPriorityBtn_EditForm.addEventListener("click", ()=>{
+            highPriorityBtn_EditForm.classList.replace("highClass_EditForm","clicked-highPriorityBtn");
+            mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
+            lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
+            priorityOfTask2= "highPriority";
+        });
+
+        //when Confirm edit Button is pressed...
+        confirmEditBtn.addEventListener("click", ()=>{
+                if(priorityOfTask2 == ""){priorityOfTask2=element.priority};
+                //these 4 change the  task Div                
+                pForTitle.innerHTML = taskName_EditForm.value;
+                const dateUpdated = element.dueDate;
+                const dateUpdatedFormatted= format(dateUpdated, "MM/dd/yy");
+                dateDisplay.innerHTML = dateUpdatedFormatted;
+                taskDiv.classList.remove( element.priority);
+                taskDiv.classList.add( priorityOfTask2);
+
+                // These three change the task Object
+                element.title=  taskName_EditForm.value;
+                element.description = info_EditForm.value;
+                element.dueDate = new Date(((date_EditForm.value).toString()));
+                element.priority= priorityOfTask2;
+
+                //hides the form popup when comfirm edit is clicked.
+                taskEditPopUp.classList.replace("visible", "hidden");
+                blurBackground.classList.replace("visible", "hidden");
+                
+                confirmEditBtn.remove();
+        });
+
+    
+    });
+    
+    //This is eventlistener for Delete Icon
+    deleteIcon.addEventListener("click", ()=>{
+
+        if(document.getElementById("confirmDeletion")){
+            document.getElementById("confirmDeletion").remove();
+        }
+
+        const confirmDeletion = document.createElement("button");
+        confirmDeletion.setAttribute("id", "confirmDeletion");
+        confirmDeletion.classList.add("deletePopUpConfirmButtons")
+        confirmDeletion.innerHTML="Delete";
+        taskDeletePopUpConfirm.append(confirmDeletion);
+        
+
+        taskDeletePopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible");
+
+        confirmDeletion.addEventListener("click", ()=>{
+            allTasksArray.splice(element, 1);
+            taskDiv.remove();
+            taskDeletePopUp.classList.replace("visible", "hidden");
+            blurBackground.classList.replace("visible", "hidden");
+            setTimeout(()=>{confirmDeletion.remove()}, 1000);
+        })
+    });
+    
+
+
 }
 
 
-const displayCompletedTasks = () =>{console.log("Completed Filter Clicked")}
-const displayTodayTasks = () =>{console.log("Today Filter Clicked")}
-const displayWeekTasks = () =>{console.log("Week Filter Clicked")}
-const displayImportantTasks =()=>{console.log("Important Filter Clicked")}
-    // document.querySelectorAll(".task").forEach(element =>{element.remove()});
-    // toDoTasksArray.forEach(element, ()=>{});
 
-//🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨 DISPLAY TO DO TASKS ARRAY 🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
-const displayAllTasks = () =>{
-
-    //delete task list in order to reset.
-    document.querySelectorAll(".task").forEach(element =>{element.remove()})
-
-    //display task list. 🚨🚨🚨this is probably would be dom stuff
-    toDoTasksArray.forEach((element,index) =>{
-        const taskDiv = document.createElement("div");
-        taskList.appendChild(taskDiv);
-        taskDiv.classList.add("task");
-        taskDiv.classList.add(element.priority);
-        const pForTitle = document.createElement("p");
-        pForTitle.classList.add("taskTitle");
-        pForTitle.innerHTML = element.title; //title
-        const taskIconsDiv = document.createElement("div")
-        taskIconsDiv.classList.add("taskIconsDiv");
-        const dateDisplay = document.createElement("div");
-        const infoIcon = document.createElement("div");
-        const editIcon = document.createElement("div");
-        const deleteIcon = document.createElement("div");
-        dateDisplay.classList.add("date");
-        const date= element.dueDate;
-        const dateFormatted = format(date, "MM-dd-yy"); 
-        dateDisplay.innerHTML = dateFormatted; //date
-        infoIcon.classList.add("taskIcon", "infoTaskIcon");
-        editIcon.classList.add("taskIcon", "editTaskIcon");
-        deleteIcon.classList.add("taskIcon", "deleteTaskIcon");
-        taskIconsDiv.append(dateDisplay, infoIcon, editIcon, deleteIcon)
-        
-        //Code for Check & Uncheck Feature
-        const checkBox = document.createElement("div");
-        if(element.checked==true){
-            checkBox.classList.add("taskCheckBox","selectedCheckBox");   
-            taskDiv.classList.add("taskWhenChecked");   
-        } else{
-            checkBox.classList.add("taskCheckBox","unselectedCheckBox");
-            taskDiv.classList.remove("taskWhenChecked");
-        };
-        checkBox.addEventListener("click", ()=>{
-            if(checkBox.classList.contains("unselectedCheckBox")){
-                checkBox.classList.replace("unselectedCheckBox","selectedCheckBox");
-                taskDiv.classList.add("taskWhenChecked");
-                element.checked = true;
-            } else if(checkBox.classList.contains("selectedCheckBox")){
-                checkBox.classList.replace("selectedCheckBox","unselectedCheckBox");
-                taskDiv.classList.remove("taskWhenChecked");
-                element.checked = false;
-            };
-        });
-  
-        taskDiv.append(checkBox, pForTitle, taskIconsDiv);
-
-        //This is eventlistener for Info Icon
-        infoIcon.addEventListener("click", ()=>{
-
-            taskInfoPopUp.classList.replace("hidden", "visible");
-            blurBackground.classList.replace("hidden", "visible");
-            taskInfoPopUpHeaderTitle.innerHTML= element.title;
-            taskInfoPopUpHeaderTitle.style.marginLeft = "20px";
-            taskInfoPopUpInfoDescription.innerHTML = element.description;
-            taskInfoPopUpInfoDate.innerHTML = dateFormatted;
-            if(element.priority == "highPriority"){
-                taskInfoPopUpInfoPriority.innerHTML="High Priority";
-                taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-mediumPriority","taskInfoPopUpInfoPriority-lowPriority");
-                taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-highPriority");
-            } else if(element.priority == "mediumPriority"){
-                taskInfoPopUpInfoPriority.innerHTML="Medium Priority";
-                taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-highPriority","taskInfoPopUpInfoPriority-lowPriority");
-                taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-mediumPriority");
-            } else{
-                taskInfoPopUpInfoPriority.innerHTML="Low Priority";
-                taskInfoPopUpInfoPriority.classList.remove("taskInfoPopUpInfoPriority-highPriority","taskInfoPopUpInfoPriority-mediumPriority");
-                taskInfoPopUpInfoPriority.classList.add("taskInfoPopUpInfoPriority-lowPriority");
-            }
-        });
-        //This is eventlistener for Edit Icon
-        editIcon.addEventListener("click", ()=>{
-            //checks if a confirm button is already there.
-            if(document.getElementById("confirmEditBtn")){
-                document.getElementById("confirmEditBtn").remove();
-            }
-            //lets put this in a function
-
-            const confirmEditBtn = document.createElement("button")
-            confirmEditBtn.setAttribute("id","confirmEditBtn");
-            confirmEditBtn.innerHTML = "Confirm Edit";
-            taskEditPopUpFooter.appendChild(confirmEditBtn);
-                
-            // Show Edit Task Pop Up...
-            taskEditPopUp.classList.replace("hidden", "visible");
-            blurBackground.classList.replace("hidden", "visible");
-
-            // Edit Task Form is Preloaded with current data from this element...
-            taskName_EditForm.value = element.title;
-            info_EditForm.value = element.description;
-            date_EditForm.value = (format(((new Date(element.dueDate))),"yyyy-MM-dd"));
-            
-            // Prioriity is preloaded with current priority from this element...
-            if(element.priority == "highPriority"){
-                highPriorityBtn_EditForm.classList.replace("highClass_EditForm","clicked-highPriorityBtn");
-                mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
-                lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
-                
-            } else if(element.priority == "mediumPriority"){
-                mediumPriorityBtn_EditForm.classList.replace("mediumClass_EditForm","clicked-mediumPriorityBtn");
-                highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
-                lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
-            } else{
-                lowPriorityBtn_EditForm.classList.replace( "lowClass_EditForm","clicked-lowPriorityBtn");
-                highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
-                mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
-            };
-
-            //these event listeners switch the priority toggle.
-            let priorityOfTask2 = "";
-            //Checks and Switches priority to temporary variable if priority is changed... 
-            lowPriorityBtn_EditForm.addEventListener("click", ()=>{
-                lowPriorityBtn_EditForm.classList.replace( "lowClass_EditForm","clicked-lowPriorityBtn");
-                highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
-                mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
-                priorityOfTask2 = "lowPriority";
-
-            });
-            //Checks and Switches priority to temporary variable if priority is changed... 
-
-            mediumPriorityBtn_EditForm.addEventListener("click", ()=>{
-                mediumPriorityBtn_EditForm.classList.replace("mediumClass_EditForm","clicked-mediumPriorityBtn");
-                highPriorityBtn_EditForm.classList.replace("clicked-highPriorityBtn", "highClass_EditForm");
-                lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
-                priorityOfTask2= "mediumPriority";
-
-            });
-            //Checks and Switches priority to temporary variable if priority is changed... 
-
-            highPriorityBtn_EditForm.addEventListener("click", ()=>{
-                highPriorityBtn_EditForm.classList.replace("highClass_EditForm","clicked-highPriorityBtn");
-                mediumPriorityBtn_EditForm.classList.replace("clicked-mediumPriorityBtn", "mediumClass_EditForm");
-                lowPriorityBtn_EditForm.classList.replace("clicked-lowPriorityBtn", "lowClass_EditForm");
-                priorityOfTask2= "highPriority";
-            });
-
-            //when Confirm edit Button is pressed...
-            confirmEditBtn.addEventListener("click", ()=>{
-                    if(priorityOfTask2 == ""){priorityOfTask2=element.priority};
-                    //these 4 change the  task Div                
-                    pForTitle.innerHTML = taskName_EditForm.value;
-                    const dateUpdated = element.dueDate;
-                    const dateUpdatedFormatted= format(dateUpdated, "MM/dd/yy");
-                    dateDisplay.innerHTML = dateUpdatedFormatted;
-                    taskDiv.classList.remove( element.priority);
-                    taskDiv.classList.add( priorityOfTask2);
-
-                    // These three change the task Object
-                    element.title=  taskName_EditForm.value;
-                    element.description = info_EditForm.value;
-                    element.dueDate = new Date(((date_EditForm.value).toString()));
-                    element.priority= priorityOfTask2;
-
-                    //hides the form popup when comfirm edit is clicked.
-                    taskEditPopUp.classList.replace("visible", "hidden");
-                    blurBackground.classList.replace("visible", "hidden");
-                    
-                    confirmEditBtn.remove();
-            });
-
-        
-        });
-        //🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
-        
-        //This is eventlistener for Delete Icon
-        deleteIcon.addEventListener("click", ()=>{
-
-            if(document.getElementById("confirmDeletion")){
-                document.getElementById("confirmDeletion").remove();
-            }
-
-            const confirmDeletion = document.createElement("button");
-            confirmDeletion.setAttribute("id", "confirmDeletion");
-            confirmDeletion.classList.add("deletePopUpConfirmButtons")
-            confirmDeletion.innerHTML="Delete";
-            taskDeletePopUpConfirm.append(confirmDeletion);
-            
-
-            taskDeletePopUp.classList.replace("hidden", "visible");
-            blurBackground.classList.replace("hidden", "visible");
-
-            confirmDeletion.addEventListener("click", ()=>{
-                toDoTasksArray.splice(element, 1);
-                taskDiv.remove();
-                taskDeletePopUp.classList.replace("visible", "hidden");
-                blurBackground.classList.replace("visible", "hidden");
-                setTimeout(()=>{confirmDeletion.remove()}, 1000);
-            })
-        });
-        
-
-    });
-
-};
-//🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨 End Of Important Function 🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
 
 const addCircle = document.getElementById("addCircle");
 const mainAddTaskForm = document.getElementById("mainAddTask");
@@ -277,13 +284,6 @@ const taskDeletePopUp = document.getElementById("taskDeletePopUp");
 const cancelDeletion =document.getElementById("cancelDeletion");
 const taskDeletePopUpConfirm = document.getElementById("taskDeletePopUpConfirm");
 
-// const addEffectOnClick=(element) =>{
-//     element.addEventListener("click",()=>{
-//         element.classList.add("clickedEffect");
-//         setTimeout(()=>{element.classList.remove("clickedEffect")},3000);
-//     })
-    
-// }
 
 const toggle_Add_Info_Edit_PopUp = () =>{
         
@@ -383,13 +383,12 @@ const addTask = () =>{
         }
     })
 
-  //🚨🚨🚨add feature so you when you exit add task form it clears everything
     addTaskFormButton.addEventListener("click", ()=>{
         if(taskName.value !=="" &&  info.value !=="" && priorityOfTask !=="" && date.value !==0){
 
             console.log("taskName: " + taskName.value + ", info: " + info.value + ", date: " +date.value +", priority: "+ priorityOfTask);
             const newTask = toDoFactory( taskName.value, info.value, new Date((date.value)) , priorityOfTask, false);
-            toDoTasksArray.unshift(newTask);
+            allTasksArray.unshift(newTask);
     
             mainAddTaskForm.classList.replace("visible", "hidden")
             blurBackground.classList.replace("visible", "hidden")
@@ -410,6 +409,13 @@ const addTask = () =>{
     });
 
 };
+
+
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 When I Click ALl Filter, my added tasks disaper.
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 They also get Reordered. 
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 Need to build out the Filters. Probabaly gotta add a function
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 to make everything shorter, but if i can make it work for 1
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 I cna then go replicate and simplify.
 
 
 
