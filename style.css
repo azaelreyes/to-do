@@ -179,6 +179,22 @@ hr{
   overflow-y: auto;
   max-height: 65vh;
 }
+@keyframes append-animate {
+	from {
+		transform: scale(.7);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;	
+	}
+}
+
+.new-task {
+	transform-origin: 70% 0;
+	animation: append-animate .3s linear;
+}
+
 .task{
   display: flex;
   flex-wrap: wrap;
@@ -192,7 +208,7 @@ hr{
   color:rgb(89, 89, 89);
   border-radius: 10px;
   margin-bottom: 20px;
-  transition: all .1s ease-in-out;
+  overflow: hidden;
 }
 
 .taskWhenChecked{
