@@ -6,69 +6,62 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <!-- Header -->
-    <div id="header">
-      <div class="toDoLogo"></div>
-      <h1>TO-DO</h1>
-    </div>
-     <!-- SideBar -->
-     <div id="sidebar">
+      <!-- Header -->
+      <div id="header">
+        <div class="toDoLogo"></div>
+        <h1>TO-DO</h1>
+      </div>
+      <!-- SideBar -->
+      <div id="sidebar">
 
-        <div id="allFilter"class = "sidebarItem">
-          <div class="inbox sideBarItemIcon"></div>
-          <p>All</p>
-        </div>
-        <div id="todayFilter" class = "sidebarItem">
-          <div class="today sideBarItemIcon"></div>
-          <p>Today</p>
-        </div>
-        <div id="weekFilter" class = "sidebarItem">
-          <div class="week sideBarItemIcon"></div>
-          <p>Week</p>
-        </div>
-        <div id="importantFilter" class = "sidebarItem">
-          <div class="important sideBarItemIcon"></div>
-          <p>Important</p>
-        </div>
-        <div id="completedFilter" class = "sidebarItem">
-          <div class="done sideBarItemIcon"></div>
-          <p>Completed</p>
-        </div>
+          <div id="allFilter"class = "sidebarItem">
+            <div class="inbox sideBarItemIcon"></div>
+            <p>All</p>
+          </div>
+          <div id="todayFilter" class = "sidebarItem">
+            <div class="today sideBarItemIcon"></div>
+            <p>Today</p>
+          </div>
+          <div id="weekFilter" class = "sidebarItem">
+            <div class="week sideBarItemIcon"></div>
+            <p>Week</p>
+          </div>
+          <div id="importantFilter" class = "sidebarItem">
+            <div class="important sideBarItemIcon"></div>
+            <p>Important</p>
+          </div>
+          <div id="completedFilter" class = "sidebarItem">
+            <div class="done sideBarItemIcon"></div>
+            <p>Completed</p>
+          </div>
+          
+          <div id="projects">
+              <div id = "projectsTitle">
+                <p>Projects</p>
+                <div id="addProject"></div>
+              </div>
+
+              <hr>
+              <div id="projectList">
+
+                  <!--  <div class="projectItem">
+                    <p>Example 1</p>
+                    <div class="projectIcons">
+                      <div class="editProject projectEditDelete"></div>
+                      <div class="deleteProject projectEditDelete"></div>
+                    </div>
+                  </div> -->
+                  
+
+              </div>
+          </div>
+          
         
-        <div id="projects">
-            <div id = "projectsTitle">
-              <p>Projects</p>
-              <div id="addProject"></div>
-            </div>
 
-            <hr>
-            <div id="projectList">
-
-                <!-- <div class="projectItem">
-                  <p>Example 1</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                </div>
-
-                <div class="projectItem">
-                  <p>Example 2</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                </div> -->
-
-            </div>
-        </div>
-        
-       
-
-     </div>
-     <div id="addCircle"></div>
-     <!-- Tasks Section -->
-     <div id="mainTasks">
+      </div>
+      <div id="addCircle"></div>
+      <!-- Tasks Section -->
+      <div id="mainTasks">
 
         <div id="mainTasksTitle">
             <div id="mainTaskTitleIcon" class="inbox taskTitleIcon"></div>
@@ -218,7 +211,45 @@
           <button id="confirmNewProject" class="deletePopUpConfirmButtons">Add Project</button>
         </div>
           
-    </div>   
+      </div>   
+    
+      <!--Edit Project Pop Up  -->
+      <div id="editProjectPopUp" class="hidden">
+        <div id="editProjectHeader">
+          <p>Edit Project</p>
+          <div id="editProjectExitIcon"></div>
+        </div>
+        <div id="projectTitleFormEdit"> 
+          <input type="text" id="projectNameInputForEdit" name="project" required
+              placeholder="Enter Project Name">
+        </div>
+        <div id="editProjectConfirmationEdit">
+          <button id="cancelEditProject"  class="deletePopUpConfirmButtons">Cancel</button>
+          <button id="confirmEditProject" class="deletePopUpConfirmButtons">Confirm Edit</button>
+        </div>
+          
+      </div>  
+      <!-- Delete Project Pop Up -->
+      <div id="projectDeletePopUp" class="hidden">
+        <div id="projectDeletePopUpHeader">
+          <p id="projectInfoPopUpHeaderTitle">Delete this Project?</p>
+          <div id="projectDeletePopUpExit"></div>
+        </div>
+        <div id="keepTaskQuestion">
+          <p>Delete tasks as well?</p>
+          <label class="switch">
+            <input id="projectToggle" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
+        <div id="projectDeletePopUpConfirmation">
+          <button id="cancelDeletionEdit"  class="deletePopUpConfirmButtons">Cancel</button>
+          <!-- <button id="confirmDeletion" class="deletePopUpConfirmButtons">Delete</button> -->
+        </div>
+          
+      </div>  
+
+
     <script src="main.js" defer></script>  
   </body>
 </html>
