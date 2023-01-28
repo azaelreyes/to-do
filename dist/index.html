@@ -38,56 +38,28 @@
         <div id="projects">
             <div id = "projectsTitle">
               <p>Projects</p>
-              <div class="addProject"></div>
+              <div id="addProject"></div>
             </div>
 
             <hr>
-            <div class="projectList">
-                <div class="projectItem">
+            <div id="projectList">
+
+                <!-- <div class="projectItem">
                   <p>Example 1</p>
                   <div class="projectIcons">
                     <div class="editProject projectEditDelete"></div>
                     <div class="deleteProject projectEditDelete"></div>
                   </div>
-                  
                 </div>
+
                 <div class="projectItem">
                   <p>Example 2</p>
                   <div class="projectIcons">
                     <div class="editProject projectEditDelete"></div>
                     <div class="deleteProject projectEditDelete"></div>
                   </div>
-                </div>
-                <div class="projectItem">
-                  <p>Example 1</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                  
-                </div>
-                <div class="projectItem">
-                  <p>Example 2</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                </div>
-                <div class="projectItem">
-                  <p>Example 1</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                  
-                </div>
-                <div class="projectItem">
-                  <p>Example 2</p>
-                  <div class="projectIcons">
-                    <div class="editProject projectEditDelete"></div>
-                    <div class="deleteProject projectEditDelete"></div>
-                  </div>
-                </div>
+                </div> -->
+
             </div>
         </div>
         
@@ -132,17 +104,23 @@
           <div id="exitAddTask"></div>
         </div>
         <div id="newTaskForm">
-            <input type="text" id="taskName" name="task" required
-              placeholder="Task Name">
-            <textarea rows="4" cols="50" id="info" name="info" required
-              placeholder="Task Description"></textarea>
+            <input type="text" id="taskName" name="task" required placeholder="Task Name">
+
+            <textarea rows="4" cols="50" id="info" name="info" required placeholder="Task Description"></textarea>
+
             <label for="date">Due Date:</label>
             <input type="date" id="date" name="date">
+
+            <label style="margin-left: 80px;"for="project">Project:</label>
+            <select name="project" id="projectsDropdown">
+              <option selected="selected">none</option>
+            </select>
+
             <br>
 
             <div id="bottomOfFOrm">
-              
                 <div id="priorityLvlDiv">
+                  <label for="priority">Priority:</label>
                   <button id="lowPriorityBtn" class=" priorityLvl lowClass">Low</button>
                   <button id="mediumPriorityBtn" class="priorityLvl mediumClass">Medium</button>
                   <button id="highPriorityBtn" class="priorityLvl highClass">High</button>
@@ -168,6 +146,10 @@
               <p>Due:</p>
               <p id="taskInfoPopUpInfoDate" ></p>
           </div>
+          <div class="taskInfoPopUpFooterProjectDiv">
+            <p>Project:</p>
+            <p id="taskInfoPopUpFooterProject" ></p>
+        </div>
           <div class="taskInfoPopUpInfoPriorityDiv"> 
               <div class="taskInfoPopUpInfoPriority-priorityLvl ">
                 <p id="taskInfoPopUpInfoPriority"></p>
@@ -189,11 +171,17 @@
               placeholder="Task Description"></textarea>
             <label for="date">Due Date:</label>
             <input type="date" id="date_EditForm" name="date">
+
+            <label style="margin-left: 80px;"for="project">Project:</label>
+            <select name="project" id="projectsDropdown_edit">
+              <option selected="selected">none</option>
+            </select>
             <br>
 
             <div id="taskEditPopUpFooter">
               
                 <div id="priorityLvlDiv_EditForm">
+                  <label for="priority">Priority:</label>
                   <button id="lowPriorityBtn_EditForm" class=" priorityLvl lowClass_EditForm">Low</button>
                   <button id="mediumPriorityBtn_EditForm" class="priorityLvl mediumClass_EditForm">Medium</button>
                   <button id="highPriorityBtn_EditForm" class="priorityLvl highClass_EditForm">High</button>
@@ -214,8 +202,23 @@
           </div>
             
       </div>   
-
-
+       
+      <!-- Add Project Pop UP -->
+      <div id="addProjectPopUp" class="hidden">
+        <div id="addProjectHeader">
+          <p>Create New Project</p>
+          <div id="addProjectExitIcon"></div>
+        </div>
+        <div id="projectTitleForm"> 
+          <input type="text" id="projectNameInput" name="project" required
+              placeholder="Enter Project Name">
+        </div>
+        <div id="addProjectConfirmation">
+          <button id="cancelNewProject"  class="deletePopUpConfirmButtons">Cancel</button>
+          <button id="confirmNewProject" class="deletePopUpConfirmButtons">Add Project</button>
+        </div>
+          
+    </div>   
     <script src="main.js" defer></script>  
   </body>
 </html>

@@ -80,12 +80,14 @@ body{
   box-shadow: 3px 3px 3px rgb(151, 148, 148);
   transform: scale(1.1);
 }
+
+
 #projects{
   margin-top: 20px;
   margin-left: 15px;
   margin-right: 15px;
 }
-.projectList{
+#projectList{
   max-height: 30vh;
   overflow-y: auto;
   padding-left: 5px;
@@ -104,29 +106,33 @@ hr{
   border-color: rgb(209, 205, 205);
   border-radius: 10px;
 }
-.addProject{
+#addProject{
   background-image: url(./img/addProject.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
-  width: 40px;
-  height: 4vh; 
+  background-size: 122%;
+  width: 35px;
+  height:35px; 
   margin-left: 80px;
+  border-radius: 60px;
+  transition: all .2s ease-in-out;
+}
+#addProject:hover{
+  box-shadow: 3px 3px 3px rgb(151, 148, 148);
+  transform: scale(1.1);
 }
 .projectItem{
   background-color: whitesmoke;
   border-radius: 10px;
   margin-bottom: 15px;
-  
+  border-left: 15px solid rgb(255, 124, 124);
   height: 45px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding-left: 10px;
-
 }
 .projectItem:hover{box-shadow: 5px 5px 5px rgb(89, 89, 89);}
-
 .editProject{background-image: url(./img/edit.svg);}
 .deleteProject{background-image: url(./img/delete.svg);}
 .projectEditDelete{
@@ -156,19 +162,23 @@ hr{
   height: 35px;
   width: 35px;
   margin-right: 5px;
+  /* border-left: 15px solid rgb(255, 124, 124); */
+
 }
 #mainTasksTitle{
   justify-content: center;
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  font-size: 30px;
+  font-size: 25px;
   color:rgb(89, 89, 89);
+
 }
 #taskListTitle{
   margin-top:-30px;
   margin-left: 15px;
   margin-right: 15px;
+
 }
 #taskListTitle >p{
   font-size: 20px;
@@ -294,6 +304,62 @@ hr{
   margin-left: auto; 
   margin-right: auto;
 }
+#addProjectPopUp{
+  position: absolute;
+  height: 200px;
+  width: 350px;
+  background-color: rgb(231, 231, 231);
+  left: 0; 
+  right: 0; 
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto; 
+  margin-right: auto; 
+  border-radius:10px;
+}
+#addProjectHeader{
+  height: 55px;
+  width: 335px;
+  background-color: rgb(219, 81, 81);
+  color:whitesmoke;
+  font-size: larger;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-left: 15px;
+}
+#projectTitleForm{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+#projectNameInput{
+  height: 30px;
+  width: 290px ;
+  padding-left: 15px;
+  font-size: larger;
+  border-radius:10px;
+  border: 0px;
+}
+
+#confirmNewProject{background-color: rgb(147, 187, 147);}
+#cancelNewProject{background-color: rgb(253, 131, 131);}
+
+#addProjectConfirmation{
+  display: flex;
+  flex:wrap;
+  height: 90px;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
 #taskDeletePopUp{
   position: absolute;
   height: 170px;
@@ -333,7 +399,7 @@ hr{
 }
 .deletePopUpConfirmButtons{
   height: 50px;
-  width: 135px;
+  width: 145px;
   color:white;
   border-radius: 10px;
   border: solid 0px;
@@ -361,7 +427,7 @@ hr{
 .mainAddTaskHeader > p { margin-left: 15px;}
 .taskEditPopUpHeader > p { margin-left: 15px;}
 
-#exitAddTask, #taskInfoPopUpExit, #exitEditTask, #taskDeletePopUpExit{
+#exitAddTask, #taskInfoPopUpExit, #exitEditTask, #taskDeletePopUpExit, #addProjectExitIcon{
   background-image: url(./img/exit.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -372,7 +438,7 @@ hr{
   margin: 0 10px 0 auto;
   transition: all .5s ease-in-out
 }
-#exitAddTask:hover, #taskInfoPopUpExit:hover, #exitEditTask:hover, #taskDeletePopUpExit:hover{
+#exitAddTask:hover, #taskInfoPopUpExit:hover, #exitEditTask:hover, #taskDeletePopUpExit:hover, #addProjectExitIcon:hover{
   transform: scale(1.3);
   transform: rotate(180deg)
 }
@@ -382,6 +448,14 @@ hr{
   margin-right: 20px;
   margin-top: 20px;
 
+}
+#newTaskForm > select ,#editTaskForm > select{
+  height: 30px;
+  width: 140px;
+  border: solid 0px;
+  text-align: center;
+  border-radius: 10px;
+  color: rgb(105, 105, 105);
 }
 #info , #info_EditForm{
   width: 540px;
@@ -395,6 +469,11 @@ hr{
 }
 #info:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 
+#projectsDropdown{
+
+}
+
+
 #taskName , #taskName_EditForm{
   height: 30px;
   width: 540px ;
@@ -405,13 +484,15 @@ hr{
 }
 #taskName:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 #date, #date_EditForm{
-  width: 120px;
+  width: 140px;
   height: 30px;
   padding-left: 15px;
   margin-top: 20px;
   border-radius:10px;
   border: 0px;
   padding-right: 10px; 
+  text-align: center;
+  color: rgb(105, 105, 105);
 }
 #date:hover #date_EditForm:hover{  box-shadow: 2px 2px 2px rgb(89, 89, 89);}
 #addTaskForm, #confirmEditBtn{
@@ -421,7 +502,6 @@ hr{
   border:  solid 3px rgb(159, 202, 143) ;
   background-color: rgb(159, 202, 143);
   color:white;
-  margin-right: 10px; 
   transition: all .2s ease-in-out; 
 }
 #addTaskForm:hover, #confirmEditBtn:hover{
@@ -432,7 +512,13 @@ hr{
 #priorityLvlDiv, #priorityLvlDiv_EditForm{
   display: flex;
   flex-wrap: wrap;
-  width: 350px;
+  width: 410px;
+}
+#priorityLvlDiv>label , #priorityLvlDiv_EditForm>label{
+  line-height: 40px;
+  align-items: center;
+  margin-top:0 ;
+  margin-right: 10px;
 }
 #bottomOfFOrm, #taskEditPopUpFooter{
   display: flex;
@@ -444,7 +530,7 @@ hr{
   justify-content: space-between;
 }
 .priorityLvl{
-  width: 100px;
+  width: 90px;
   height: 35px;
   margin-right: 5px;
   border-radius:10px;
@@ -469,6 +555,7 @@ hr{
 .lowClass:hover, .lowClass_EditForm:hover{background-color: rgb(62, 205, 252);}
 label{
   color:rgb(89, 89, 89);
+  margin-left: 10px;
 }
 
 .clicked-highPriorityBtn{background-color: rgb(233, 94, 94); color:white;}
@@ -494,21 +581,27 @@ label{
 
 .taskInfoPopUpFooter{
   height: 95px;
-  width: 600px;
+  width: 580px;
   color: rgb(89, 89, 89);
   justify-content: space-between;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
 }
 
-.taskInfoPopUpFooterDateDiv{
+.taskInfoPopUpFooterDateDiv, .taskInfoPopUpFooterProjectDiv{
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding-left: 5%;
-  
 }
+
+#taskInfoPopUpFooterProject{
+  padding-left: 10px;
+  padding-right: -10px;
+}
+.taskInfoPopUpFooterProjectDiv
 .taskInfoPopUpInfoPriorityDiv{
   padding-right: 3%;
 }
