@@ -385,6 +385,12 @@ const confirmEditProject = document.getElementById("confirmEditProject") ;
 const projectDeletePopUp =document.getElementById("projectDeletePopUp");
 const cancelDeletionEdit = document.getElementById("cancelDeletionEdit")
 const projectDeletePopUpExit = document.getElementById("projectDeletePopUpExit");
+const projectList = document.getElementById("projectList")
+const editProjectPopUp = document.getElementById("editProjectPopUp");
+const projectToggle = document.getElementById("projectToggle");
+const projectDeletePopUpConfirmation= document.getElementById("projectDeletePopUpConfirmation");
+
+
 const toggle_Add_Info_Edit_Project_PopUp = () =>{
     addCircle.addEventListener("click", () => {
         mainAddTaskForm.classList.replace("hidden", "visible")
@@ -461,117 +467,6 @@ const toggle_Add_Info_Edit_Project_PopUp = () =>{
         }
     });
 };
-const projectList = document.getElementById("projectList")
-const editProjectPopUp = document.getElementById("editProjectPopUp");
-const createProject = (projectName) =>{
-    projectsArray.push(projectName);
-    const projectItem = document.createElement("div");
-    const projectTitle = document.createElement("p");
-    projectTitle.innerHTML=projectName;
-    projectItem.classList.add("projectItem");
-    const projectIcons = document.createElement("div");
-    projectIcons.classList.add("projectIcons");
-    const editProject = document.createElement("div");
-    const deleteProject = document.createElement("div");
-    editProject.classList.add("editProject");
-    editProject.classList.add("projectEditDelete");
-    deleteProject.classList.add("deleteProject");
-    deleteProject.classList.add("projectEditDelete");
-    projectIcons.append(editProject, deleteProject)
-    projectItem.append(projectTitle,projectIcons);
-    projectList.appendChild(projectItem);
-
-    const projectAsOption = document.createElement("option");
-    projectAsOption.setAttribute("selected", "unselected");
-    projectAsOption.innerHTML=projectName;
-    const editDropdownOption = document.createElement("option");
-    editDropdownOption.setAttribute("selected", "unselected");
-    editDropdownOption.innerHTML=projectName;
-
-    projectsDropdown.appendChild(projectAsOption);
-    projectsDropdown_edit.appendChild(editDropdownOption);
-
-    projectItem.addEventListener("click",()=>{
-            document.querySelectorAll(".task").forEach(element =>{element.remove()})
-            allTasksArray.forEach(element=>{
-                if (element.project == projectTitle.innerHTML){
-                    createTask(element)
-                };
-                mainTasksTitleText.innerHTML=projectTitle.innerHTML;
-                mainTaskTitleIcon.classList.remove("today","week", "important","done","inbox");
-                activeFilter = projectTitle.innerHTML;
-            })
-    })
-    editProject.addEventListener("click",()=>{
-        editProjectPopUp.classList.replace("hidden", "visible");
-        blurBackground.classList.replace("hidden", "visible")
-        projectNameInputForEdit.value = projectName;
-
-        if(projectNameInputForEdit.value !== ""){
-            confirmEditProject.addEventListener("click",()=>{
-                editProjectPopUp.classList.replace("visible", "hidden");
-                blurBackground.classList.replace("visible", "hidden");
-                projectTitle.innerHTML=projectNameInputForEdit.value;
-                projectAsOption.innerHTML = projectNameInputForEdit.value;
-                editDropdownOption.innerHTML = projectNameInputForEdit.value;
-                projectsArray.splice((projectsArray.indexOf(projectName)), 1, projectNameInputForEdit.value);
-                allTasksArray.forEach(element=>{ if(element.project==projectName){element.project = projectNameInputForEdit.value;}})
-            });
-        };
-    })
-//🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
-    deleteProject.addEventListener("click",()=>{
-        //cretate deletion button
-        if(document.getElementById("confirmDeletionEdit")){document.getElementById("confirmDeletionEdit").remove()}
-
-        projectDeletePopUp.classList.replace("hidden", "visible");
-        blurBackground.classList.replace("hidden", "visible");
-        const confirmProjectDeletion = document.createElement("button"); //main delete Button
-        confirmProjectDeletion.classList.add("deletePopUpConfirmButtons");
-        confirmProjectDeletion.setAttribute("id", "confirmDeletionEdit");
-        confirmProjectDeletion.innerHTML="Delete"
-        projectDeletePopUpConfirmation.appendChild(confirmProjectDeletion);
-
-        confirmProjectDeletion.addEventListener("click",()=>{
-
-            projectDeletePopUp.classList.replace("visible", "hidden");
-            blurBackground.classList.replace("visible", "hidden");
-
-            if( projectToggle.checked){
-
-                let placeholderArr = [];
-                allTasksArray.forEach((element)=>{
-                    if(element.project !== projectTitle.innerHTML){ placeholderArr.push(element)};
-                });
-                allTasksArray=placeholderArr;
-            }else if(!projectToggle.checked){
-                allTasksArray.forEach((element)=>{
-                    if(element.project == projectTitle.innerHTML){element.project = "none"};  
-                });
-            }
-            projectsArray.splice((projectsArray.indexOf(projectTitle.innerHTML)), 1); //delete From Projects Array 
-            projectAsOption.remove(); //delete from add task dropdown
-            editDropdownOption.remove(); //delete from edit task dropdown
-            projectItem.remove() //delete From Projects Display
-
-
-        });
-    });     
-//🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
-
-
-
-        
-
-
-
-
-};
-const projectDeletePopUpConfirmation= document.getElementById("projectDeletePopUpConfirmation");
-createProject("Project 1");
-createProject("Project 2");
-const projectToggle = document.getElementById("projectToggle");
-
 const addTask = () =>{
 
 
@@ -651,15 +546,112 @@ const addTask = () =>{
 
 };
 
+const createProject = (projectName) =>{
+    projectsArray.push(projectName);
+    const projectItem = document.createElement("div");
+    const projectTitle = document.createElement("p");
+    projectTitle.innerHTML=projectName;
+    projectItem.classList.add("projectItem");
+    const projectIcons = document.createElement("div");
+    projectIcons.classList.add("projectIcons");
+    const editProject = document.createElement("div");
+    const deleteProject = document.createElement("div");
+    editProject.classList.add("editProject");
+    editProject.classList.add("projectEditDelete");
+    deleteProject.classList.add("deleteProject");
+    deleteProject.classList.add("projectEditDelete");
+    projectIcons.append(editProject, deleteProject)
+    projectItem.append(projectTitle,projectIcons);
+    projectList.appendChild(projectItem);
+
+    const projectAsOption = document.createElement("option");
+    projectAsOption.setAttribute("selected", "unselected");
+    projectAsOption.innerHTML=projectName;
+    const editDropdownOption = document.createElement("option");
+    editDropdownOption.setAttribute("selected", "unselected");
+    editDropdownOption.innerHTML=projectName;
+
+    projectsDropdown.appendChild(projectAsOption);
+    projectsDropdown_edit.appendChild(editDropdownOption);
+
+    projectItem.addEventListener("click",()=>{
+            document.querySelectorAll(".task").forEach(element =>{element.remove()})
+            allTasksArray.forEach(element=>{
+                if (element.project == projectTitle.innerHTML){
+                    createTask(element)
+                };
+                mainTasksTitleText.innerHTML=projectTitle.innerHTML;
+                mainTaskTitleIcon.classList.remove("today","week", "important","done","inbox");
+                activeFilter = projectTitle.innerHTML;
+            })
+    })
+    editProject.addEventListener("click",()=>{
+        editProjectPopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible")
+        projectNameInputForEdit.value = projectName;
+
+        if(projectNameInputForEdit.value !== ""){
+            confirmEditProject.addEventListener("click",()=>{
+                editProjectPopUp.classList.replace("visible", "hidden");
+                blurBackground.classList.replace("visible", "hidden");
+                projectTitle.innerHTML=projectNameInputForEdit.value;
+                projectAsOption.innerHTML = projectNameInputForEdit.value;
+                editDropdownOption.innerHTML = projectNameInputForEdit.value;
+                projectsArray.splice((projectsArray.indexOf(projectName)), 1, projectNameInputForEdit.value);
+                allTasksArray.forEach(element=>{ if(element.project==projectName){element.project = projectNameInputForEdit.value;}})
+            });
+        };
+    })
+    deleteProject.addEventListener("click",()=>{
+        //cretate deletion button
+        if(document.getElementById("confirmDeletionEdit")){document.getElementById("confirmDeletionEdit").remove()}
+
+        projectDeletePopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible");
+        const confirmProjectDeletion = document.createElement("button"); //main delete Button
+        confirmProjectDeletion.classList.add("deletePopUpConfirmButtons");
+        confirmProjectDeletion.setAttribute("id", "confirmDeletionEdit");
+        confirmProjectDeletion.innerHTML="Delete"
+        projectDeletePopUpConfirmation.appendChild(confirmProjectDeletion);
+
+        confirmProjectDeletion.addEventListener("click",()=>{
+
+            projectDeletePopUp.classList.replace("visible", "hidden");
+            blurBackground.classList.replace("visible", "hidden");
+
+            if( projectToggle.checked){
+
+                let placeholderArr = [];
+                allTasksArray.forEach((element)=>{
+                    if(element.project !== projectTitle.innerHTML){ placeholderArr.push(element)};
+                });
+                allTasksArray=placeholderArr;
+            }else if(!projectToggle.checked){
+                allTasksArray.forEach((element)=>{
+                    if(element.project == projectTitle.innerHTML){element.project = "none"};  
+                });
+            }
+            projectsArray.splice((projectsArray.indexOf(projectTitle.innerHTML)), 1); //delete From Projects Array 
+            projectAsOption.remove(); //delete from add task dropdown
+            editDropdownOption.remove(); //delete from edit task dropdown
+            projectItem.remove() //delete From Projects Display
 
 
-//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
+        });
+    });    
+};
+createProject("Project 1");
+createProject("Project 2");
+
+
+
+
+//🚨🚨🚨🟩🟩🟩🟩🟩  Extra Features To add? 🟩🟩🟩🟩🟩🟩 
 //add project tags onto tasks? This would Be kinda easy, I can also add ability to change project.
 // add little icons with numbers to show how many tasks per filter/project.
 // add extra add taks sbutton inside the TaskList. WOuld have to write Html code for it and then just 
 //easiily add it to the toggling of Add pop up from addCircle.
 
 //🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
-//Gotta go back and simplify all code
-
+//Everything appeasr to be working. Can go back and clean up code, simplify, add better projects.
 export {toggle_Add_Info_Edit_Project_PopUp, displayAllTasks, addTask,sidebarFilters};
