@@ -1,29 +1,25 @@
 import { debounce } from "lodash";
 import { format, addDays } from 'date-fns';
 
-
-let allTasksArray = []; //store All Tasks here.
-let projectsArray = []; //store All Project Names here
-const toDoFactory = (title, description, dueDate, priority, checked, project) => {
-    return { title, description, dueDate, priority, checked, project};
-};
-//Sample Tasks Below
-const sampleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dui sed turpis ornare suscipit vitae sit amet arcu. Cras ut convallis metus. Vivamus aliquet, est eu efficitur cursus, mi odio viverra odio, eget laoreet purus augue vel felis. Nam sed sem venenatis, tincidunt nibh ut, fringilla lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent sit amet efficitur leo, in luctus purus. Vestibulum eget ipsum id ex faucibus finibus. Nunc ullamcorper ligula vel maximus pellentesque Suspendisse vitae ex at lectus ullamcorper sodales condimentum vel est. Nulla facilisi. Ut vitae aliquam dui. Integer blandit ultricies lacus. Pellentesque laoreet ipsum tortor, vel pulvinar lectus dapibus rutrum. Pellentesque vel justo magna. Praesent lacus massa, lacinia condimentum viverra sed, tempor vel leo. Integer id neque vel tellus porta tempus quis eu urna. Nam rhoncus bibendum mi eget tincidunt. Quisque iaculis non purus ac sodales. Integer auctor non massa at cursus. Proin sit amet quam congue, suscipit tortor posuere, iaculis ex. Maecenas mattis augue vel ipsum hendrerit ultrices. Cras massa dui, porttitor a dictum id, volutpat ac ipsum. Pellentesque pellentesque ultricies purus, eu pulvinar justo sollicitudin sit amet."
-const exampleTask1 = toDoFactory("EX1 P1 I1", "Example Important 1 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
-const exampleTask2 = toDoFactory("EX2 P2 T1", "Example Today 2 " +sampleDescription,format((new Date()), "MM-dd-yy"), "mediumPriority", false, "Project 2");
-const exampleTask3 = toDoFactory("EX3 N1 C1.", "Example Description 3 " +sampleDescription, new Date('2023-06-21'), "lowPriority", true, "none");
-const exampleTask4 = toDoFactory("EX4 P2 WK1", "Example Description 4 " +sampleDescription,  format(addDays((new Date()), 3), "MM-dd-yy"), "mediumPriority", false, "Project 2");
-const exampleTask5 = toDoFactory("EX5 N2 ", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", false, "none");
-const exampleTask6 = toDoFactory("EX6 P2 T1 I2", "Example Important 2 " +sampleDescription, format((new Date()), "MM-dd-yy"), "highPriority", false, "Project 2");
-const exampleTask7 = toDoFactory("EX7 P1 I3", "Example Important 3 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
-const exampleTask8 = toDoFactory("EX8 P1 C2", "Example Description 2 " +sampleDescription, new Date('2023-05-30'), "mediumPriority", true, "Project 1");
-const exampleTask9 = toDoFactory("EX9 P2 T3", "Example Description 3 " +sampleDescription, format((new Date()), "MM-dd-yy"), "lowPriority", false, "Project 2");
-const exampleTask10 = toDoFactory("EX10 P1 Wk2", "Example Description 4 " +sampleDescription, format(addDays((new Date()), 6), "MM-dd-yy"), "mediumPriority", false, "Project 1");
-const exampleTask11= toDoFactory("EX11 P2 C3", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", true, "Project 2");
-const exampleTask12= toDoFactory("EX12 P1 WK3 I4", "Example Important 4 " +sampleDescription, format(addDays((new Date()), 2), "MM-dd-yy"), "highPriority", false, "Project 1");
-allTasksArray.push(exampleTask1, exampleTask2, exampleTask3, exampleTask4, exampleTask5, exampleTask6);
-allTasksArray.push(exampleTask7, exampleTask8, exampleTask9, exampleTask10, exampleTask11, exampleTask12);
-
+const addProject = document.getElementById("addProject");
+const addProjectPopUp = document.getElementById("addProjectPopUp");
+const addProjectExitIcon = document.getElementById("addProjectExitIcon");
+const editProjectExitIcon = document.getElementById("editProjectExitIcon");
+const cancelNewProject = document.getElementById("cancelNewProject");
+const confirmNewProject = document.getElementById("confirmNewProject");
+const projectNameInput = document.getElementById("projectNameInput");
+const projectsDropdown = document.getElementById("projectsDropdown");
+const projectsDropdown_edit = document.getElementById("projectsDropdown_edit");
+const projectNameInputForEdit = document.getElementById("projectNameInputForEdit")
+const cancelEditProject = document.getElementById("cancelEditProject");
+const projectDeletePopUp =document.getElementById("projectDeletePopUp");
+const cancelDeletionEdit = document.getElementById("cancelDeletionEdit")
+const projectDeletePopUpExit = document.getElementById("projectDeletePopUpExit");
+const projectList = document.getElementById("projectList")
+const editProjectPopUp = document.getElementById("editProjectPopUp");
+const projectToggle = document.getElementById("projectToggle");
+const projectDeletePopUpConfirmation= document.getElementById("projectDeletePopUpConfirmation");
+const editProjectConfirmationEdit = document.getElementById("editProjectConfirmationEdit");
 const taskList = document.getElementById("taskList");
 const taskInfoPopUp = document.getElementById("taskInfoPopUp");
 const taskInfoPopUpHeaderTitle = document.getElementById("taskInfoPopUpHeaderTitle");
@@ -64,9 +60,27 @@ const taskDeletePopUpExit = document.getElementById("taskDeletePopUpExit");
 const taskDeletePopUp = document.getElementById("taskDeletePopUp");
 const cancelDeletion =document.getElementById("cancelDeletion");
 const taskDeletePopUpConfirm = document.getElementById("taskDeletePopUpConfirm");
-//To Do Task Factory 
 let activeFilter = "";
-
+let allTasksArray = []; //store All Tasks here.
+let projectsArray = []; //store All Project Names here
+const toDoFactory = (title, description, dueDate, priority, checked, project) => {
+    return { title, description, dueDate, priority, checked, project};
+};
+const sampleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dui sed turpis ornare suscipit vitae sit amet arcu. Cras ut convallis metus. Vivamus aliquet, est eu efficitur cursus, mi odio viverra odio, eget laoreet purus augue vel felis. Nam sed sem venenatis, tincidunt nibh ut, fringilla lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent sit amet efficitur leo, in luctus purus. Vestibulum eget ipsum id ex faucibus finibus. Nunc ullamcorper ligula vel maximus pellentesque Suspendisse vitae ex at lectus ullamcorper sodales condimentum vel est. Nulla facilisi. Ut vitae aliquam dui. Integer blandit ultricies lacus. Pellentesque laoreet ipsum tortor, vel pulvinar lectus dapibus rutrum. Pellentesque vel justo magna. Praesent lacus massa, lacinia condimentum viverra sed, tempor vel leo. Integer id neque vel tellus porta tempus quis eu urna. Nam rhoncus bibendum mi eget tincidunt. Quisque iaculis non purus ac sodales. Integer auctor non massa at cursus. Proin sit amet quam congue, suscipit tortor posuere, iaculis ex. Maecenas mattis augue vel ipsum hendrerit ultrices. Cras massa dui, porttitor a dictum id, volutpat ac ipsum. Pellentesque pellentesque ultricies purus, eu pulvinar justo sollicitudin sit amet."
+const exampleTask1 = toDoFactory("EX1 P1 I1", "Example Important 1 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
+const exampleTask2 = toDoFactory("EX2 P2 T1", "Example Today 2 " +sampleDescription,format((new Date()), "MM-dd-yy"), "mediumPriority", false, "Project 2");
+const exampleTask3 = toDoFactory("EX3 N1 C1.", "Example Description 3 " +sampleDescription, new Date('2023-06-21'), "lowPriority", true, "none");
+const exampleTask4 = toDoFactory("EX4 P2 WK1", "Example Description 4 " +sampleDescription,  format(addDays((new Date()), 3), "MM-dd-yy"), "mediumPriority", false, "Project 2");
+const exampleTask5 = toDoFactory("EX5 N2 ", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", false, "none");
+const exampleTask6 = toDoFactory("EX6 P2 T1 I2", "Example Important 2 " +sampleDescription, format((new Date()), "MM-dd-yy"), "highPriority", false, "Project 2");
+const exampleTask7 = toDoFactory("EX7 P1 I3", "Example Important 3 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
+const exampleTask8 = toDoFactory("EX8 P1 C2", "Example Description 2 " +sampleDescription, new Date('2023-05-30'), "mediumPriority", true, "Project 1");
+const exampleTask9 = toDoFactory("EX9 P2 T3", "Example Description 3 " +sampleDescription, format((new Date()), "MM-dd-yy"), "lowPriority", false, "Project 2");
+const exampleTask10 = toDoFactory("EX10 P1 Wk2", "Example Description 4 " +sampleDescription, format(addDays((new Date()), 6), "MM-dd-yy"), "mediumPriority", false, "Project 1");
+const exampleTask11= toDoFactory("EX11 P2 C3", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", true, "Project 2");
+const exampleTask12= toDoFactory("EX12 P1 WK3 I4", "Example Important 4 " +sampleDescription, format(addDays((new Date()), 2), "MM-dd-yy"), "highPriority", false, "Project 1");
+allTasksArray.push(exampleTask1, exampleTask2, exampleTask3, exampleTask4, exampleTask5, exampleTask6);
+allTasksArray.push(exampleTask7, exampleTask8, exampleTask9, exampleTask10, exampleTask11, exampleTask12);
 const sidebarFilters = ()=>{
     let freshStart = true;
     if(freshStart){displayAllTasks(); freshStart=false;};
@@ -77,13 +91,38 @@ const sidebarFilters = ()=>{
     importantFilter.addEventListener("click", displayImportantTasks);
     completedFilter.addEventListener("click", displayCompletedTasks);
 };
+const taskListAddTask = ()=>{
+    const addTaskBar = document.createElement("div");
+    addTaskBar.classList.add("task");
+    addTaskBar.classList.add("addTaskBar")
+    addTaskBar.classList.add("hidden")
+
+    const addTaskBarChild = document.createElement("div");
+    addTaskBarChild.classList.add("addTaskTask");
+    const addTaskBarTitle = document.createElement("p");
+    addTaskBarTitle.classList.add("taskTitle")
+    addTaskBarTitle.innerHTML = "Add Task";
+    addTaskBar.append(addTaskBarChild, addTaskBarTitle)
+    taskList.appendChild(addTaskBar);
+    setTimeout( ()=>{
+        addTaskBar.classList.add("new-task");
+        addTaskBar.classList.replace("hidden","visible");
+    }, allTasksArray.length*50)
+    addTaskBar.addEventListener("click", () => {
+        mainAddTaskForm.classList.replace("hidden", "visible")
+        blurBackground.classList.replace("hidden", "visible")
+    });
+    addTask();
+}
 const displayAllTasks = () =>{
+
     document.querySelectorAll(".task").forEach(element =>{element.remove()})
     allTasksArray.forEach((element) =>{ createTask(element)});
     mainTasksTitleText.innerHTML="All";
     mainTaskTitleIcon.classList.remove("today","week", "important","done");
     mainTaskTitleIcon.classList.add("inbox");
     activeFilter = "all"
+    taskListAddTask();
 };
 const displayCompletedTasks = () =>{
     document.querySelectorAll(".task").forEach(element =>{element.remove()})
@@ -92,6 +131,8 @@ const displayCompletedTasks = () =>{
     mainTaskTitleIcon.classList.remove("inbox","week", "today","important");
     mainTaskTitleIcon.classList.add("done");
     activeFilter="done"
+    taskListAddTask();
+
 };
 const displayImportantTasks = () =>{
     document.querySelectorAll(".task").forEach(element =>{element.remove()})
@@ -100,6 +141,8 @@ const displayImportantTasks = () =>{
     mainTaskTitleIcon.classList.remove("inbox","week", "today","done");
     mainTaskTitleIcon.classList.add("important");
     activeFilter="important"
+    taskListAddTask();
+
 };
 const displayTodayTasks = () =>{
     document.querySelectorAll(".task").forEach(element =>{element.remove()})
@@ -117,6 +160,8 @@ const displayTodayTasks = () =>{
     mainTaskTitleIcon.classList.remove("inbox","week", "important","done");
     mainTaskTitleIcon.classList.add("today");
     activeFilter="today"
+    taskListAddTask();
+
 }
 const displayWeekTasks = () =>{
     document.querySelectorAll(".task").forEach(element =>{element.remove()})
@@ -133,6 +178,8 @@ const displayWeekTasks = () =>{
         if(dueDate >= dateFrom && dueDate <= dateTo ){createTask(element)};
     });
     activeFilter="week"
+    taskListAddTask();
+
 };
 const createTask = (element) =>{
     const taskDiv = document.createElement("div");
@@ -189,8 +236,6 @@ const createTask = (element) =>{
         taskInfoPopUpHeaderTitle.innerHTML= element.title;
         taskInfoPopUpHeaderTitle.style.marginLeft = "20px";
         taskInfoPopUpInfoDescription.innerHTML = element.description;
-
-        //🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨
         taskInfoPopUpInfoDate.innerHTML = format(addDays((new Date(element.dueDate)),0),  "MM-dd-yy");
 
 
@@ -278,9 +323,6 @@ const createTask = (element) =>{
         //when Confirm edit Button is pressed...
         confirmEditBtn.addEventListener("click", ()=>{
                 if(priorityOfTask2 == ""){priorityOfTask2=element.priority};
-
-            //format(addDays((new Date(date_EditForm.value)),0),  "MM-dd-yy")
-
                 //these 4 change the  task Div                
                 pForTitle.innerHTML = taskName_EditForm.value;
                 taskDiv.classList.remove(element.priority);
@@ -366,29 +408,16 @@ const filterResetFunction = ()=>{
             displayTodayTasks();
         }else if(activeFilter=="week"){
             displayWeekTasks();
-        };
+        }else{
+            allTasksArray.forEach((element) =>{ createTask(element)});
+            mainTasksTitleText.innerHTML="All";
+            mainTaskTitleIcon.classList.remove("today","week", "important","done");
+            mainTaskTitleIcon.classList.add("inbox");
+            activeFilter = "all"
+        }
     },500)
 }
-const addProject = document.getElementById("addProject");
-const addProjectPopUp = document.getElementById("addProjectPopUp");
-const addProjectExitIcon = document.getElementById("addProjectExitIcon");
-const editProjectExitIcon = document.getElementById("editProjectExitIcon");
 
-const cancelNewProject = document.getElementById("cancelNewProject");
-const confirmNewProject = document.getElementById("confirmNewProject");
-const projectNameInput = document.getElementById("projectNameInput");
-const projectsDropdown = document.getElementById("projectsDropdown");
-const projectsDropdown_edit = document.getElementById("projectsDropdown_edit");
-const projectNameInputForEdit = document.getElementById("projectNameInputForEdit")
-const cancelEditProject = document.getElementById("cancelEditProject");
-const confirmEditProject = document.getElementById("confirmEditProject") ;
-const projectDeletePopUp =document.getElementById("projectDeletePopUp");
-const cancelDeletionEdit = document.getElementById("cancelDeletionEdit")
-const projectDeletePopUpExit = document.getElementById("projectDeletePopUpExit");
-const projectList = document.getElementById("projectList")
-const editProjectPopUp = document.getElementById("editProjectPopUp");
-const projectToggle = document.getElementById("projectToggle");
-const projectDeletePopUpConfirmation= document.getElementById("projectDeletePopUpConfirmation");
 
 
 const toggle_Add_Info_Edit_Project_PopUp = () =>{
@@ -396,6 +425,7 @@ const toggle_Add_Info_Edit_Project_PopUp = () =>{
         mainAddTaskForm.classList.replace("hidden", "visible")
         blurBackground.classList.replace("hidden", "visible")
     });
+   
     addProject.addEventListener("click",()=>{
         blurBackground.classList.replace("hidden", "visible")
         addProjectPopUp.classList.replace("hidden", "visible");
@@ -439,19 +469,13 @@ const toggle_Add_Info_Edit_Project_PopUp = () =>{
         projectDeletePopUp.classList.replace("visible", "hidden");
         blurBackground.classList.replace("visible", "hidden");
     })
-    cancelEditProject.addEventListener("click", ()=>{
-        editProjectPopUp.classList.replace("visible", "hidden");
-        blurBackground.classList.replace("visible", "hidden");
-    })
+    
 
     addProjectExitIcon.addEventListener("click", ()=>{
         addProjectPopUp.classList.replace("visible", "hidden");
         blurBackground.classList.replace("visible", "hidden");
     });
-    editProjectExitIcon.addEventListener("click", ()=>{
-        editProjectPopUp.classList.replace("visible", "hidden");
-        blurBackground.classList.replace("visible", "hidden");
-    });
+    
     cancelNewProject.addEventListener("click", () => {
         addProjectPopUp.classList.replace("visible", "hidden")
         blurBackground.classList.replace("visible", "hidden")
@@ -468,8 +492,6 @@ const toggle_Add_Info_Edit_Project_PopUp = () =>{
     });
 };
 const addTask = () =>{
-
-
     let priorityOfTask = "";
     
     lowBtn.addEventListener("click", ()=>{
@@ -518,19 +540,14 @@ const addTask = () =>{
 
         }
     })
-
+    date.value=format((new Date()), "MM-dd-yy");
     addTaskFormButton.addEventListener("click", ()=>{
         if(taskName.value !=="" &&  info.value !=="" && priorityOfTask !=="" && date.value !==0){
-
             const newTask = toDoFactory( taskName.value, info.value, new Date((date.value)) , priorityOfTask, false, projectsDropdown.value);
             allTasksArray.unshift(newTask);
-    
             mainAddTaskForm.classList.replace("visible", "hidden")
             blurBackground.classList.replace("visible", "hidden")
-    
-            displayAllTasks();
-    
-            //clears all form and unclicks priority.
+            filterResetFunction();
             taskName.value = "";
             info.value="";
             date.value= "yyyy-MM-dd";
@@ -539,14 +556,13 @@ const addTask = () =>{
             lowBtn.classList.replace("clicked-lowPriorityBtn", "lowClass");
             mediumBtn.classList.replace("clicked-mediumPriorityBtn", "mediumClass");
             highBtn.classList.replace("clicked-highPriorityBtn", "highClass");
-
         };
-
     });
 
 };
-
 const createProject = (projectName) =>{
+    
+
     projectsArray.push(projectName);
     const projectItem = document.createElement("div");
     const projectTitle = document.createElement("p");
@@ -575,33 +591,81 @@ const createProject = (projectName) =>{
     projectsDropdown_edit.appendChild(editDropdownOption);
 
     projectItem.addEventListener("click",()=>{
-            document.querySelectorAll(".task").forEach(element =>{element.remove()})
-            allTasksArray.forEach(element=>{
-                if (element.project == projectTitle.innerHTML){
-                    createTask(element)
-                };
-                mainTasksTitleText.innerHTML=projectTitle.innerHTML;
-                mainTaskTitleIcon.classList.remove("today","week", "important","done","inbox");
-                activeFilter = projectTitle.innerHTML;
-            })
-    })
-    editProject.addEventListener("click",()=>{
-        editProjectPopUp.classList.replace("hidden", "visible");
-        blurBackground.classList.replace("hidden", "visible")
-        projectNameInputForEdit.value = projectName;
+            if(activeFilter !== projectName){
+                document.querySelectorAll(".task").forEach(element =>{element.remove()})
+                allTasksArray.forEach(element=>{
+                    if (element.project == projectName){ createTask(element)};
+                    mainTasksTitleText.innerHTML=projectName;
+                    mainTaskTitleIcon.classList.remove("today","week", "important","done","inbox");
+                    activeFilter = projectName;
+                })
+                taskListAddTask();
 
-        if(projectNameInputForEdit.value !== ""){
-            confirmEditProject.addEventListener("click",()=>{
+            };
+            
+    })
+
+    editProject.addEventListener("click",()=>{
+
+        const confirmEditProject = document.createElement("button");
+        confirmEditProject.classList.add("deletePopUpConfirmButtons")
+        confirmEditProject.setAttribute("id","confirmEditProject");
+        confirmEditProject.innerHTML="Edit"
+        editProjectConfirmationEdit.appendChild(confirmEditProject)
+        
+
+        editProjectPopUp.classList.replace("hidden", "visible");
+        blurBackground.classList.replace("hidden", "visible");
+
+        projectNameInputForEdit.value = projectName;
+        
+        confirmEditProject.addEventListener("click",()=>{
+
+            if(projectsArray.includes(projectNameInputForEdit.value) && projectsArray.indexOf(projectNameInputForEdit.value) !== projectsArray.indexOf(projectName) ){
+                alert("Cannot Name Project as another Project");
+            }else if(projectNameInputForEdit.value !== ""&& projectNameInputForEdit.value!== "none"){
                 editProjectPopUp.classList.replace("visible", "hidden");
                 blurBackground.classList.replace("visible", "hidden");
                 projectTitle.innerHTML=projectNameInputForEdit.value;
                 projectAsOption.innerHTML = projectNameInputForEdit.value;
                 editDropdownOption.innerHTML = projectNameInputForEdit.value;
-                projectsArray.splice((projectsArray.indexOf(projectName)), 1, projectNameInputForEdit.value);
+                projectsArray.splice(projectsArray.indexOf(projectName), 1, projectNameInputForEdit.value);
                 allTasksArray.forEach(element=>{ if(element.project==projectName){element.project = projectNameInputForEdit.value;}})
-            });
-        };
+                projectName = projectNameInputForEdit.value;
+                setTimeout(()=>{confirmEditProject.remove()}, 800);
+
+                if(activeFilter !== projectName){
+                    document.querySelectorAll(".task").forEach(element =>{element.remove()})
+                    allTasksArray.forEach(element=>{
+                        if (element.project == projectName){ createTask(element)};
+                        mainTasksTitleText.innerHTML=projectName;
+                        mainTaskTitleIcon.classList.remove("today","week", "important","done","inbox");
+                        activeFilter = projectName;
+                    })
+                };
+            } else if (projectNameInputForEdit.value == ""){
+                alert("Cannot leave Name Empty");
+            }
+        });
+
+
+        cancelEditProject.addEventListener("click", ()=>{
+            editProjectPopUp.classList.replace("visible", "hidden");
+            blurBackground.classList.replace("visible", "hidden");
+            setTimeout(()=>{confirmEditProject.remove()}, 800);
+
+        });
+        editProjectExitIcon.addEventListener("click", ()=>{
+            editProjectPopUp.classList.replace("visible", "hidden");
+            blurBackground.classList.replace("visible", "hidden");
+            setTimeout(()=>{confirmEditProject.remove()}, 800);
+
+        });
+
+
     })
+
+
     deleteProject.addEventListener("click",()=>{
         //cretate deletion button
         if(document.getElementById("confirmDeletionEdit")){document.getElementById("confirmDeletionEdit").remove()}
@@ -643,15 +707,12 @@ const createProject = (projectName) =>{
 createProject("Project 1");
 createProject("Project 2");
 
-
-
-
-//🚨🚨🚨🟩🟩🟩🟩🟩  Extra Features To add? 🟩🟩🟩🟩🟩🟩 
-//add project tags onto tasks? This would Be kinda easy, I can also add ability to change project.
-// add little icons with numbers to show how many tasks per filter/project.
-// add extra add taks sbutton inside the TaskList. WOuld have to write Html code for it and then just 
-//easiily add it to the toggling of Add pop up from addCircle.
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
+//Clean Up Code seperate DOM Code and Logic Code
 
 //🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
-//Everything appeasr to be working. Can go back and clean up code, simplify, add better projects.
+// Use Local Storage API
+//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
+// Seperate Dom From App logic
+
 export {toggle_Add_Info_Edit_Project_PopUp, displayAllTasks, addTask,sidebarFilters};
