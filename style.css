@@ -117,6 +117,24 @@ hr{
   box-shadow: 3px 3px 3px rgb(151, 148, 148);
   transform: scale(1.1);
 }
+.addTaskBar{
+  border-left:15px solid whitesmoke;
+}
+
+.addTaskTask{
+  background-image: url(./img/addProject.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 122%;
+  width: 25px;
+  height: 25px; 
+  border-radius: 60px;
+  transition: all .2s ease-in-out;
+}
+.addTaskTask:hover{
+  box-shadow: 3px 3px 3px rgb(151, 148, 148);
+  transform: scale(1.1);
+}
 .projectItem{
   background-color: whitesmoke;
   border-radius: 10px;
