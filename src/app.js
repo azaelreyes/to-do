@@ -1,6 +1,7 @@
 import { debounce } from "lodash";
 import { format, addDays } from 'date-fns';
 
+
 const addProject = document.getElementById("addProject");
 const addProjectPopUp = document.getElementById("addProjectPopUp");
 const addProjectExitIcon = document.getElementById("addProjectExitIcon");
@@ -66,37 +67,47 @@ let projectsArray = []; //store All Project Names here
 const toDoFactory = (title, description, dueDate, priority, checked, project) => {
     return { title, description, dueDate, priority, checked, project};
 };
-const sampleDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dui sed turpis ornare suscipit vitae sit amet arcu. Cras ut convallis metus. Vivamus aliquet, est eu efficitur cursus, mi odio viverra odio, eget laoreet purus augue vel felis. Nam sed sem venenatis, tincidunt nibh ut, fringilla lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent sit amet efficitur leo, in luctus purus. Vestibulum eget ipsum id ex faucibus finibus. Nunc ullamcorper ligula vel maximus pellentesque Suspendisse vitae ex at lectus ullamcorper sodales condimentum vel est. Nulla facilisi. Ut vitae aliquam dui. Integer blandit ultricies lacus. Pellentesque laoreet ipsum tortor, vel pulvinar lectus dapibus rutrum. Pellentesque vel justo magna. Praesent lacus massa, lacinia condimentum viverra sed, tempor vel leo. Integer id neque vel tellus porta tempus quis eu urna. Nam rhoncus bibendum mi eget tincidunt. Quisque iaculis non purus ac sodales. Integer auctor non massa at cursus. Proin sit amet quam congue, suscipit tortor posuere, iaculis ex. Maecenas mattis augue vel ipsum hendrerit ultrices. Cras massa dui, porttitor a dictum id, volutpat ac ipsum. Pellentesque pellentesque ultricies purus, eu pulvinar justo sollicitudin sit amet."
-const exampleTask1 = toDoFactory("EX1 P1 I1", "Example Important 1 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
-const exampleTask2 = toDoFactory("EX2 P2 T1", "Example Today 2 " +sampleDescription,format((new Date()), "MM-dd-yy"), "mediumPriority", false, "Project 2");
-const exampleTask3 = toDoFactory("EX3 N1 C1.", "Example Description 3 " +sampleDescription, new Date('2023-06-21'), "lowPriority", true, "none");
-const exampleTask4 = toDoFactory("EX4 P2 WK1", "Example Description 4 " +sampleDescription,  format(addDays((new Date()), 3), "MM-dd-yy"), "mediumPriority", false, "Project 2");
-const exampleTask5 = toDoFactory("EX5 N2 ", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", false, "none");
-const exampleTask6 = toDoFactory("EX6 P2 T1 I2", "Example Important 2 " +sampleDescription, format((new Date()), "MM-dd-yy"), "highPriority", false, "Project 2");
-const exampleTask7 = toDoFactory("EX7 P1 I3", "Example Important 3 " +sampleDescription, new Date('2023-03-21'), "highPriority", false, "Project 1");
-const exampleTask8 = toDoFactory("EX8 P1 C2", "Example Description 2 " +sampleDescription, new Date('2023-05-30'), "mediumPriority", true, "Project 1");
-const exampleTask9 = toDoFactory("EX9 P2 T3", "Example Description 3 " +sampleDescription, format((new Date()), "MM-dd-yy"), "lowPriority", false, "Project 2");
-const exampleTask10 = toDoFactory("EX10 P1 Wk2", "Example Description 4 " +sampleDescription, format(addDays((new Date()), 6), "MM-dd-yy"), "mediumPriority", false, "Project 1");
-const exampleTask11= toDoFactory("EX11 P2 C3", "Example Description 5 " +sampleDescription, new Date('2023-10-31'), "mediumPriority", true, "Project 2");
-const exampleTask12= toDoFactory("EX12 P1 WK3 I4", "Example Important 4 " +sampleDescription, format(addDays((new Date()), 2), "MM-dd-yy"), "highPriority", false, "Project 1");
+const exampleTask1 = toDoFactory("Soccer Practice", "Pajaro Park with Uli for 1-2 hrs, then a 4 mile jog.", new Date('2023-02-06'), "mediumPriority", false, "Training");
+const exampleTask2 = toDoFactory("Code", "Follow the Odin Project" ,format((new Date()), "MM-dd-yy"), "mediumPriority", false, "Coding");
+const exampleTask3 = toDoFactory("Moms Birthday", "Shes turning 52", new Date('2023-7-08'), "highPriority", false, "none");
+const exampleTask4 = toDoFactory("Soccer Indoor Game", "Indoor Game 3rd Divion with Gio",  format(addDays((new Date()), 3), "MM-dd-yy"), "highPriority", false, "Training");
+const exampleTask5 = toDoFactory("Finish To-Do Project", "Powerhouse gym with Josie", new Date('2023-10-31'), "mediumPriority", true, "Coding");
+const exampleTask6 = toDoFactory("Gym Session", "Powerhouse gym with Josie", format((new Date()), "MM-dd-yy"), "lowPriority", false, "Training");
+const exampleTask7 = toDoFactory("Gym Session", "Powerhouse gym with Josie ", new Date('2023-03-21'), "mediumPriority", false, "Training");
+const exampleTask8 = toDoFactory("Soccer Practice", "Focus on finishing, shot accuracy and strength ", new Date('2023-05-30'), "mediumPriority", true, "Training");
+const exampleTask9 = toDoFactory("Pick Up Soccer", "Focus on your vision and patience" , format((new Date()), "MM-dd-yy"), "lowPriority", false, "Training");
+const exampleTask10 = toDoFactory("Bartend at Jaliscos", "Take stuff to play soccer after", format(addDays((new Date()), 6), "MM-dd-yy"), "mediumPriority", false, "none");
+const exampleTask11= toDoFactory("Haircut", "Go with your barber kevin", new Date('2023-10-31'), "mediumPriority", true, "none");
+const exampleTask12= toDoFactory("Sunday League Soccer Game", "Playing at Watsonville High", format(addDays((new Date()), 2), "MM-dd-yy"), "highPriority", false, "Training");
 allTasksArray.push(exampleTask1, exampleTask2, exampleTask3, exampleTask4, exampleTask5, exampleTask6);
 allTasksArray.push(exampleTask7, exampleTask8, exampleTask9, exampleTask10, exampleTask11, exampleTask12);
+
+const storage = () =>{
+    localStorage.setItem("allTasksArray",JSON.stringify(allTasksArray));
+    localStorage.setItem("projectsArray",JSON.stringify(projectsArray));
+}
 const sidebarFilters = ()=>{
-    let freshStart = true;
-    if(freshStart){displayAllTasks(); freshStart=false;};
+    if ((JSON.parse(localStorage.getItem("allTasksArray")))){allTasksArray = JSON.parse(localStorage.getItem("allTasksArray"))} 
+    if ((JSON.parse(localStorage.getItem("projectsArray")))){projectsArray = JSON.parse(localStorage.getItem("projectsArray"))}
+
+    displayAllTasks();
 
     allFilter.addEventListener("click", displayAllTasks);
     todayFilter.addEventListener("click", displayTodayTasks);
     weekFilter.addEventListener("click", displayWeekTasks);
     importantFilter.addEventListener("click", displayImportantTasks);
     completedFilter.addEventListener("click", displayCompletedTasks);
-};
+}; 
+//All of this stays in logic. Maybe I can put the "document.getElementById"
+//pass all the variables to appLogic?
+
+
 const taskListAddTask = ()=>{
+    //This is all dom
     const addTaskBar = document.createElement("div");
     addTaskBar.classList.add("task");
     addTaskBar.classList.add("addTaskBar")
     addTaskBar.classList.add("hidden")
-
     const addTaskBarChild = document.createElement("div");
     addTaskBarChild.classList.add("addTaskTask");
     const addTaskBarTitle = document.createElement("p");
@@ -104,6 +115,7 @@ const taskListAddTask = ()=>{
     addTaskBarTitle.innerHTML = "Add Task";
     addTaskBar.append(addTaskBarChild, addTaskBarTitle)
     taskList.appendChild(addTaskBar);
+    //this is logic?
     setTimeout( ()=>{
         addTaskBar.classList.add("new-task");
         addTaskBar.classList.replace("hidden","visible");
@@ -115,9 +127,10 @@ const taskListAddTask = ()=>{
     addTask();
 }
 const displayAllTasks = () =>{
+    document.querySelectorAll(".task").forEach(element =>{element.remove()});
 
-    document.querySelectorAll(".task").forEach(element =>{element.remove()})
-    allTasksArray.forEach((element) =>{ createTask(element)});
+    allTasksArray.forEach((element) =>{createTask(element)});
+
     mainTasksTitleText.innerHTML="All";
     mainTaskTitleIcon.classList.remove("today","week", "important","done");
     mainTaskTitleIcon.classList.add("inbox");
@@ -219,10 +232,14 @@ const createTask = (element) =>{
             checkBox.classList.replace("unselectedCheckBox","selectedCheckBox");
             taskDiv.classList.add("taskWhenChecked");
             element.checked = true;
+            storage();
+
         } else if(checkBox.classList.contains("selectedCheckBox")){
             checkBox.classList.replace("selectedCheckBox","unselectedCheckBox");
             taskDiv.classList.remove("taskWhenChecked");
             element.checked = false;
+            storage();
+
         };
     });
 
@@ -344,7 +361,7 @@ const createTask = (element) =>{
                 //hides the form popup when comfirm edit is clicked.
                 taskEditPopUp.classList.replace("visible", "hidden");
                 blurBackground.classList.replace("visible", "hidden");
-                
+                storage();
                 confirmEditBtn.remove();
         });
 
@@ -375,6 +392,8 @@ const createTask = (element) =>{
             taskDeletePopUp.classList.replace("visible", "hidden");
             blurBackground.classList.replace("visible", "hidden");
             setTimeout(()=>{confirmDeletion.remove()}, 1000);
+            storage();
+
         })
     });
     
@@ -417,9 +436,6 @@ const filterResetFunction = ()=>{
         }
     },500)
 }
-
-
-
 const toggle_Add_Info_Edit_Project_PopUp = () =>{
     addCircle.addEventListener("click", () => {
         mainAddTaskForm.classList.replace("hidden", "visible")
@@ -551,18 +567,17 @@ const addTask = () =>{
             taskName.value = "";
             info.value="";
             date.value= "yyyy-MM-dd";
-            // priorityOfTask="none";
-            // projectsDropdown.value = "none";
             lowBtn.classList.replace("clicked-lowPriorityBtn", "lowClass");
             mediumBtn.classList.replace("clicked-mediumPriorityBtn", "mediumClass");
             highBtn.classList.replace("clicked-highPriorityBtn", "highClass");
         };
+        storage();
+
     });
 
 };
 const createProject = (projectName) =>{
     
-
     projectsArray.push(projectName);
     const projectItem = document.createElement("div");
     const projectTitle = document.createElement("p");
@@ -646,6 +661,7 @@ const createProject = (projectName) =>{
             } else if (projectNameInputForEdit.value == ""){
                 alert("Cannot leave Name Empty");
             }
+            storage();
         });
 
 
@@ -700,19 +716,12 @@ const createProject = (projectName) =>{
             editDropdownOption.remove(); //delete from edit task dropdown
             projectItem.remove() //delete From Projects Display
 
+            storage();
 
         });
     });    
 };
-createProject("Project 1");
-createProject("Project 2");
+createProject("Training");
+createProject("Coding");
 
-//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
-//Clean Up Code seperate DOM Code and Logic Code
-
-//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
-// Use Local Storage API
-//🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🚨🚨🚨🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩 
-// Seperate Dom From App logic
-
-export {toggle_Add_Info_Edit_Project_PopUp, displayAllTasks, addTask,sidebarFilters};
+export {toggle_Add_Info_Edit_Project_PopUp, displayAllTasks, addTask,sidebarFilters, storage};
