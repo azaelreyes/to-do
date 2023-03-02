@@ -14,7 +14,7 @@ body{
   height: 70px;
   color: white;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .toDoLogo{
@@ -23,26 +23,27 @@ body{
   background-repeat: no-repeat;
   background-size: auto;
   width: 70px;
-  height: 5vh; 
+  height: 50px; 
 }
 #sidebar{
   width: 260px;
-  height: 90vh;
+  height: 100vh;
   background-color: rgb(231, 231, 231);
-  padding-top: 3vh;
+  padding-top: 20px;
 }
 
 .sidebarItem{
   display: flex;
   flex-wrap: wrap;
   width: 210px;
-  height: 3vh;
+  height: 45px;
   background-color: whitesmoke;
   color:rgb(89, 89, 89);
-  margin-bottom: 2vh;
+  margin-bottom: 10px;
   margin-left: 15px;
   border-radius: 10px;
-  padding: 1vh;
+  padding: 3px;
+  padding-left: 20px;
   align-content: center;
 }
 .sidebarItem:hover, #addCircle:hover{
@@ -53,8 +54,8 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  height: 4vh;
-  width: 4vh;
+  height: 30px;
+  width: 30px;
   margin-top: 1vh;
   margin-right: 10px;
 }
@@ -72,7 +73,7 @@ body{
   width: 60px;
   height: 60px; 
   position: absolute;
-  margin-top: -13vh;
+  margin-top: -20vh;
   margin-left: 160px;
   border-radius: 100px;
   transition: all .2s ease-in-out;
@@ -170,9 +171,9 @@ hr{
 }
 
 #mainTasks{
-  height: 93vh;
+  height: 98vh;
   margin-left:260px;
-  margin-top: -93vh;
+  margin-top: -98vh;
 }
 .taskTitleIcon{
   background-position: center;
@@ -204,7 +205,7 @@ hr{
 #taskList{
   margin-top: 30px;
   overflow-y: auto;
-  max-height: 65vh;
+  max-height: 75vh;
 }
 @keyframes append-animate {
 	from {
