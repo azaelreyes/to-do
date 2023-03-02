@@ -1,11 +1,10 @@
-# The Odin Project JavaScript
+# The Odin Project: Todo List
 
-## Project: Todo List
-
-A dynamically created _ToDo_ list with **vanilla JavaScript, HTML, & Css**.
-The project is from The Odin Project [curriculum](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list).
+A dynamically created _ToDo_ list with **vanilla JavaScript, HTML, & Css** from The Odin Project [curriculum](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/todo-list).
 
 🔗 **Live preview** of the project is [here](https://azaelreyes.github.io/to-do/).
+
+![To-Do List](dist/img/projectImage.png)
 
 ### Overview
 
@@ -33,5 +32,3 @@ The project is from The Odin Project [curriculum](https://www.theodinproject.com
 - [Google Fonts](https://fonts.google.com/)
 - [Font Awesome Icons](https://fontawesome.com/)
 - [date-fns Library](https://date-fns.org/)
-
-<img src="./img/projectImage.png">
